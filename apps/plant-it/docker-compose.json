@@ -1,0 +1,71 @@
+{
+  "services": [
+    {
+      "name": "server",
+      "image": "msdeluise/plant-it-server:0.10.0",
+      "isMain": true,
+      "internalPort": "3000",
+      "addPorts": [
+        {
+          "hostPort": 8080,
+          "containerPort": 8080
+        }
+      ],
+      "environment": {
+        "MYSQL_HOST": "db",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USERNAME": "root",
+        "MYSQL_PSW": "root",
+        "MYSQL_DATABASE": "bootdb",
+        "MYSQL_ROOT_PASSWORD": "root",
+        "JWT_EXP": "1",
+        "UPLOAD_DIR": "/upload-dir",
+        "API_PORT": "8080",
+        "LOG_LEVEL": "WARN",
+        "GOTIFY_ENABLED": "true",
+        "FLORACODEX_KEY": "${FLORACODEX_KEY}",
+        "JWT_SECRET": "${JWT_SECRET}",
+        "USERS_LIMIT": "${USERS_LIMIT}"
+      },
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/upload-dir",
+          "containerPath": "/upload-dir"
+        }
+      ],
+      "dependsOn": ["db", "cache"]
+    },
+    {
+      "name": "db",
+      "image": "mysql:8.0",
+      "isMain": false,
+      "environment": {
+        "MYSQL_HOST": "db",
+        "MYSQL_PORT": "3306",
+        "MYSQL_USERNAME": "root",
+        "MYSQL_PSW": "root",
+        "MYSQL_DATABASE": "bootdb",
+        "MYSQL_ROOT_PASSWORD": "root",
+        "JWT_EXP": "1",
+        "UPLOAD_DIR": "/upload-dir",
+        "API_PORT": "8080",
+        "LOG_LEVEL": "WARN",
+        "GOTIFY_ENABLED": "true",
+        "FLORACODEX_KEY": "${FLORACODEX_KEY}",
+        "JWT_SECRET": "${JWT_SECRET}",
+        "USERS_LIMIT": "${USERS_LIMIT}"
+      },
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/db",
+          "containerPath": "/var/lib/mysql"
+        }
+      ]
+    },
+    {
+      "name": "cache",
+      "image": "redis:7.2.1",
+      "isMain": false
+    }
+  ]
+}

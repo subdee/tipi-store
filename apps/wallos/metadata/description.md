@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="150px" src="logo.jpg" title="Plant-it">
+</p>
+
 # Wallos
 
 Information taken from https://github.com/ellite/Wallos

@@ -1,0 +1,40 @@
+{
+  "name": "Plant-it",
+  "id": "plant-it",
+  "available": true,
+  "short_desc": "Beautiful, Simple, Self-Hostable Gardening Companion App",
+  "author": "MDeLuise",
+  "port": 3000,
+  "categories": [
+    "utilities"
+  ],
+  "description": "Greenery, simplified. Introducing the self-hosted, open-source gardening app that makes plant care effortless. Manage watering schedules, capture the beauty of your plants with photos, and watch your garden thrive. ",
+  "tipi_version": 1,
+  "version": "0.10.0",
+  "source": "https://github.com/MDeLuise/plant-it",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1746457354000,
+  "updated_at": 1746457354000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "User limit",
+      "env_variable": "USERS_LIMIT"
+    },
+    {
+      "type": "text",
+      "label": "Floracodex key",
+      "env_variable": "FLORACODEX_KEY"
+    },
+    {
+      "type": "text",
+      "label": "JWT secret",
+      "env_variable": "JWT_SECRET"
+    }
+  ]
+}
