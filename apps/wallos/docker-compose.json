@@ -1,0 +1,23 @@
+{
+  "services": [
+    {
+      "name": "wallos",
+      "image": "bellamy/wallos:3.0.2",
+      "isMain": true,
+      "internalPort": "80",
+      "environment": {
+        "TZ": "${WALLOS_TZ}"
+      },
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/db",
+          "containerPath": "/var/www/html/db"
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/logos",
+          "containerPath": "/var/www/html/images/uploads/logos"
+        }
+      ]
+    }
+  ]
+}

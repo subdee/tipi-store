@@ -1,0 +1,30 @@
+{
+  "name": "Wallos",
+  "id": "wallos",
+  "available": true,
+  "short_desc": "Open-Source Personal Subscription Tracker",
+  "author": "ellite",
+  "port": 8282,
+  "categories": [
+    "finance"
+  ],
+  "description": "Open-Source Personal Subscription Tracker",
+  "tipi_version": 1,
+  "version": "3.0.2",
+  "source": "https://github.com/ellite/Wallos",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1746457354000,
+  "updated_at": 1746457354000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Your timezone",
+      "env_variable": "WALLOS_TZ"
+    }
+  ]
+}
