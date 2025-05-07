@@ -1,0 +1,90 @@
+{
+  "services": [
+    {
+      "name": "web",
+      "image": "flomp/wanderer-web:0.16.5",
+      "isMain": true,
+      "environment": {
+        "MEILI_URL": "http://search:7700",
+        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
+        "ORIGIN": "http://${APP_DOMAIN:-localhost}",
+        "BODY_SIZE_LIMIT": "Infinity",
+        "PUBLIC_POCKETBASE_URL": "http://db:8090",
+        "PUBLIC_DISABLE_SIGNUP": false,
+        "UPLOAD_FOLDER": "/app/uploads",
+        "UPLOAD_USER": null,
+        "UPLOAD_PASSWORD": null,
+        "PUBLIC_VALHALLA_URL": "https://valhalla1.openstreetmap.de",
+        "PUBLIC_NOMINATIM_URL": "https://nominatim.openstreetmap.org"
+      },
+      "internalPort": 3000,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/uploads",
+          "containerPath": "/app/uploads",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": {
+        "search": {
+          "condition": "service_healthy"
+        },
+        "db": {
+          "condition": "service_started"
+        }
+      }
+    },
+    {
+      "name": "search",
+      "image": "getmeili/meilisearch:v1.11.3",
+      "environment": {
+        "MEILI_URL": "http://search:7700",
+        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
+        "MEILI_NO_ANALYTICS": true
+      },
+      "internalPort": 7700,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/data.ms",
+          "containerPath": "/meili_data/data.ms",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "curl --fail http://localhost:7700/health || exit 1",
+        "interval": "15s",
+        "timeout": "10s",
+        "retries": 10,
+        "start_period": "20s"
+      }
+    },
+    {
+      "name": "db",
+      "image": "flomp/wanderer-db:0.16.5",
+      "environment": {
+        "MEILI_URL": "http://search:7700",
+        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
+        "POCKETBASE_ENCRYPTION_KEY": null
+      },
+      "internalPort": 8090,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/pb_data",
+          "containerPath": "/pb_data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": {
+        "search": {
+          "condition": "service_healthy"
+        }
+      }
+    }
+  ]
+}

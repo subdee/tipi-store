@@ -7,7 +7,7 @@
       "internalPort": "3000",
       "addPorts": [
         {
-          "hostPort": 8080,
+          "hostPort": 38080,
           "containerPort": 8080
         }
       ],
