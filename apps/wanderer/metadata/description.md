@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="logo_text_two_line_dark.svg" height="256" width="256">
+  <img src="https://github.com/Flomp/wanderer/blob/main/web/static/svgs/logo_text_two_line_dark.svg?raw=true" height="256" width="256">
 
 <h4>The trail catalogue that makes your GPS data searchable</h4>
 
@@ -17,7 +17,7 @@ wanderer is a self-hosted trail database. You can upload your recorded tracks or
 
 ## Core Features
 
-![Screenshot of wanderer](hero.png)
+![Screenshot of wanderer](https://github.com/Flomp/wanderer/blob/main/docs/src/assets/hero.png?raw=true)
 
 - Manage your trails
 - Plan new routes

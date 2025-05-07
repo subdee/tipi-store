@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="150px" src="logo.jpg" title="Plant-it">
+  <img width="150px" src="https://github.com/MDeLuise/plant-it/blob/main/images/plant-it-logo.png?raw=true" title="Plant-it">
 </p>
 
 <h1 align="center">Plant-it</h1>
@@ -7,6 +7,7 @@
 <p align="center"><i><b>[Project under "active" development, some features may be unstable or change in the future. A first release version is planned to be packed soon].</b></i></p>
 <p align="center">Plant-it is a <b>self-hosted gardening companion app.</b><br>Useful for keeping track of plant care, receiving notifications about when to water plants, uploading plant images, and more.</p>
 
+<img src="https://github.com/MDeLuise/plant-it/blob/main/images/banner.png?raw=true">
 
 ## Why?
 Plant-it is a gardening companion app that helps you take care of your plants.

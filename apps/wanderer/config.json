@@ -10,7 +10,7 @@
   ],
   "description": "wanderer is a self-hosted trail database. You can upload your recorded tracks or create new ones and add various metadata to build an easily searchable catalogue.",
   "tipi_version": 1,
-  "version": "0.16.5",
+  "version": "v0.16.5",
   "source": "https://github.com/Flomp/wanderer",
   "exposable": true,
   "supported_architectures": [
