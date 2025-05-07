@@ -35,6 +35,11 @@
       "type": "text",
       "label": "JWT secret",
       "env_variable": "JWT_SECRET"
+    },
+    {
+      "type": "text",
+      "label": "API domain",
+      "env_variable": "API_DOMAIN"
     }
   ]
 }
