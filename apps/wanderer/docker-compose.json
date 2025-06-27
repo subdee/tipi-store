@@ -2,7 +2,7 @@
   "services": [
     {
       "name": "web",
-      "image": "flomp/wanderer-web:v0.16.5",
+      "image": "flomp/wanderer-web:v0.17.1",
       "isMain": true,
       "environment": {
         "MEILI_URL": "http://search:7700",
@@ -62,7 +62,7 @@
     },
     {
       "name": "db",
-      "image": "flomp/wanderer-db:v0.16.5",
+      "image": "flomp/wanderer-db:v0.17.1",
       "environment": {
         "MEILI_URL": "http://search:7700",
         "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}"
