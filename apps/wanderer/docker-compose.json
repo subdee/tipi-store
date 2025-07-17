@@ -2,7 +2,7 @@
   "services": [
     {
       "name": "web",
-      "image": "flomp/wanderer-web:v0.17.1",
+      "image": "flomp/wanderer-web:v0.17.2",
       "isMain": true,
       "environment": {
         "MEILI_URL": "http://search:7700",
@@ -10,6 +10,7 @@
         "ORIGIN": "https://${APP_DOMAIN:-localhost}",
         "BODY_SIZE_LIMIT": "Infinity",
         "PUBLIC_POCKETBASE_URL": "http://db:8090",
+        "POCKETBASE_ENCRYPTION_KEY": "${POCKETBASE_ENCRYPTION_KEY}",
         "PUBLIC_DISABLE_SIGNUP": "false",
         "UPLOAD_FOLDER": "/app/uploads",
         "PUBLIC_VALHALLA_URL": "https://valhalla1.openstreetmap.de",
@@ -62,7 +63,7 @@
     },
     {
       "name": "db",
-      "image": "flomp/wanderer-db:v0.17.1",
+      "image": "flomp/wanderer-db:v0.17.2",
       "environment": {
         "MEILI_URL": "http://search:7700",
         "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}"
