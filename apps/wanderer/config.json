@@ -22,12 +22,12 @@
   "dynamic_config": true,
   "form_fields": [
     {
-      "type": "random",
+      "type": "text",
       "label": "Meili Master key",
       "env_variable": "MEILI_MASTER_KEY"
     },
     {
-      "type": "random",
+      "type": "text",
       "label": "PocketBase Encryption key",
       "env_variable": "POCKETBASE_ENCRYPTION_KEY"
     }
