@@ -66,7 +66,8 @@
       "environment": {
         "MEILI_URL": "http://search:7700",
         "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
-        "POCKETBASE_ENCRYPTION_KEY": "${POCKETBASE_ENCRYPTION_KEY}"
+        "POCKETBASE_ENCRYPTION_KEY": "${POCKETBASE_ENCRYPTION_KEY}",
+        "ORIGIN": "https://${APP_DOMAIN:-localhost}"
       },
       "internalPort": 8090,
       "volumes": [
