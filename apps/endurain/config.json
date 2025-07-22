@@ -33,8 +33,8 @@
       "env_variable": "SECRET_KEY"
     },
     {
-      "type": "random",
-      "label": "Fernet key",
+      "type": "text",
+      "label": "Fernet key (Generator: https://fernetkeygen.com/)",
       "env_variable": "FERNET_KEY"
     },
     {
