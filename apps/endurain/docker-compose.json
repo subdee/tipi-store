@@ -27,6 +27,13 @@
           "private": false
         },
         {
+          "hostPath": "${APP_DATA_DIR}/data/data",
+          "containerPath": "/app/backend/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
           "hostPath": "${APP_DATA_DIR}/data/logs",
           "containerPath": "/app/backend/logs",
           "readOnly": false,
