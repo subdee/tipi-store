@@ -20,15 +20,29 @@
       "internalPort": 8080,
       "volumes": [
         {
-          "hostPath": "${APP_DATA_DIR}/data/config",
-          "containerPath": "/app/backend/config",
+          "hostPath": "${APP_DATA_DIR}/data/data/activity_files",
+          "containerPath": "/app/backend/data/activity_files",
           "readOnly": false,
           "shared": false,
           "private": false
         },
         {
-          "hostPath": "${APP_DATA_DIR}/data/data",
-          "containerPath": "/app/backend/data",
+          "hostPath": "${APP_DATA_DIR}/data/data/activity_media",
+          "containerPath": "/app/backend/data/activity_media",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/data/activity_media",
+          "containerPath": "/app/backend/data/activity_media",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/data/user_images",
+          "containerPath": "/app/backend/data/user_images",
           "readOnly": false,
           "shared": false,
           "private": false
