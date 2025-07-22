@@ -1,0 +1,51 @@
+{
+  "name": "Endurain",
+  "id": "endurain",
+  "available": true,
+  "short_desc": "A self-hosted fitness tracking service",
+  "author": "joaovitoriasilva",
+  "port": 3300,
+  "categories": [
+    "social",
+    "data"
+  ],
+  "description": "Endurain is a self-hosted fitness tracking service designed to give users full control over their data and hosting environment.",
+  "tipi_version": 1,
+  "version": "v0.13.0-RC3",
+  "source": "https://github.com/joaovitoriasilva/endurain",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Secret key",
+      "env_variable": "SECRET_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Fernet key",
+      "env_variable": "FERNET_KEY"
+    },
+    {
+      "type": "text",
+      "label": "Geocodes Maps API key",
+      "env_variable": "GEOCODES_API"
+    },
+    {
+      "type": "text",
+      "label": "Your timezone",
+      "env_variable": "TZ"
+    }
+  ]
+}
