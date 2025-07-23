@@ -2,7 +2,7 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/joaovitoriasilva/endurain:v0.13.0-RC3",
+      "image": "ghcr.io/joaovitoriasilva/endurain:v0.13.0",
       "isMain": true,
       "environment": {
         "DB_PASSWORD": "${DB_PASSWORD}",
