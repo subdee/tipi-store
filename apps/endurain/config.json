@@ -10,8 +10,8 @@
     "data"
   ],
   "description": "Endurain is a self-hosted fitness tracking service designed to give users full control over their data and hosting environment.",
-  "tipi_version": 2,
-  "version": "v0.13.0",
+  "tipi_version": 3,
+  "version": "v0.13.1",
   "source": "https://github.com/joaovitoriasilva/endurain",
   "exposable": true,
   "supported_architectures": [

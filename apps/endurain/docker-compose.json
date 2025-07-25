@@ -2,7 +2,7 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/joaovitoriasilva/endurain:v0.13.0",
+      "image": "ghcr.io/joaovitoriasilva/endurain:v0.13.1",
       "isMain": true,
       "environment": {
         "DB_PASSWORD": "${DB_PASSWORD}",
@@ -34,8 +34,8 @@
           "private": false
         },
         {
-          "hostPath": "${APP_DATA_DIR}/data/data/activity_media",
-          "containerPath": "/app/backend/data/activity_media",
+          "hostPath": "${APP_DATA_DIR}/data/data/server_images",
+          "containerPath": "/app/backend/data/server_images",
           "readOnly": false,
           "shared": false,
           "private": false
