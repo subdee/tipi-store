@@ -1,0 +1,37 @@
+{
+  "name": "Wishlist",
+  "id": "wishlist",
+  "available": true,
+  "short_desc": "A sharable wishlist for your friends and family",
+  "author": "cmintey",
+  "port": 3280,
+  "categories": [
+    "social"
+  ],
+  "description": "Wishlist is a self-hosted wishlist application that you can share with your friends and family.",
+  "tipi_version": 1,
+  "version": "v0.51.0",
+  "source": "https://github.com/cmintey/wishlist",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1758044483000,
+  "updated_at": 1758044483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "number",
+      "label": "Token Time",
+      "env_variable": "TOKEN_TIME",
+      "default": 72
+    },
+    {
+      "type": "text",
+      "label": "Currency (3-letter ISO code)",
+      "env_variable": "CURRENCY",
+      "default": "EUR"
+    }
+  ]
+}

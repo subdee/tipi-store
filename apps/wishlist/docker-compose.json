@@ -1,0 +1,31 @@
+{
+  "services": [
+    {
+      "name": "wishlist",
+      "image": "ghcr.io/cmintey/wishlist:v0.51.0",
+      "isMain": true,
+      "environment": {
+        "ORIGIN": "https://${APP_DOMAIN:-localhost}",
+        "TOKEN_TIME": "${TOKEN_TIME}",
+        "DEFAULT_CURRENCY": "${DEFAULT_CURRENCY}"
+      },
+      "internalPort": 3280,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/uploads",
+          "containerPath": "/usr/src/app/uploads",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/usr/src/app/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}
