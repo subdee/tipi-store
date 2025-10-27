@@ -1,14 +1,24 @@
 {
+  "schemaVersion": 2,
   "services": [
     {
       "name": "wishlist",
-      "image": "ghcr.io/cmintey/wishlist:v0.51.0",
+      "image": "ghcr.io/cmintey/wishlist:v0.51.1",
       "isMain": true,
-      "environment": {
-        "ORIGIN": "https://${APP_DOMAIN:-localhost}",
-        "TOKEN_TIME": "${TOKEN_TIME}",
-        "DEFAULT_CURRENCY": "${DEFAULT_CURRENCY}"
-      },
+      "environment": [
+        {
+          "key": "ORIGIN",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "TOKEN_TIME",
+          "value": "${TOKEN_TIME}"
+        },
+        {
+          "key": "DEFAULT_CURRENCY",
+          "value": "${DEFAULT_CURRENCY}"
+        }
+      ],
       "internalPort": 3280,
       "volumes": [
         {

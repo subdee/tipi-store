@@ -9,7 +9,7 @@
     "utilities"
   ],
   "description": "Greenery, simplified. Introducing the self-hosted, open-source gardening app that makes plant care effortless. Manage watering schedules, capture the beauty of your plants with photos, and watch your garden thrive. ",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "0.10.0",
   "source": "https://github.com/MDeLuise/plant-it",
   "exposable": true,

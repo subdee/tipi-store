@@ -1,20 +1,48 @@
 {
+  "schemaVersion": 2,
   "services": [
     {
       "name": "web",
-      "image": "flomp/wanderer-web:v0.18.0",
+      "image": "flomp/wanderer-web:v0.18.3",
       "isMain": true,
-      "environment": {
-        "MEILI_URL": "http://search:7700",
-        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
-        "ORIGIN": "https://${APP_DOMAIN:-localhost}",
-        "BODY_SIZE_LIMIT": "Infinity",
-        "PUBLIC_POCKETBASE_URL": "http://db:8090",
-        "PUBLIC_DISABLE_SIGNUP": "false",
-        "UPLOAD_FOLDER": "/app/uploads",
-        "PUBLIC_VALHALLA_URL": "https://valhalla1.openstreetmap.de",
-        "PUBLIC_NOMINATIM_URL": "https://nominatim.openstreetmap.org"
-      },
+      "environment": [
+        {
+          "key": "MEILI_URL",
+          "value": "http://search:7700"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${MEILI_MASTER_KEY}"
+        },
+        {
+          "key": "ORIGIN",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "BODY_SIZE_LIMIT",
+          "value": "Infinity"
+        },
+        {
+          "key": "PUBLIC_POCKETBASE_URL",
+          "value": "http://db:8090"
+        },
+        {
+          "key": "PUBLIC_DISABLE_SIGNUP",
+          "value": "false"
+        },
+        {
+          "key": "UPLOAD_FOLDER",
+          "value": "/app/uploads"
+        },
+        {
+          "key": "PUBLIC_VALHALLA_URL",
+          "value": "https://valhalla1.openstreetmap.de"
+        },
+        {
+          "key": "PUBLIC_NOMINATIM_URL",
+          "value": "https://nominatim.openstreetmap.org"
+        }
+      ],
       "internalPort": 3000,
       "volumes": [
         {
@@ -37,11 +65,20 @@
     {
       "name": "search",
       "image": "getmeili/meilisearch:v1.11.3",
-      "environment": {
-        "MEILI_URL": "http://search:7700",
-        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
-        "MEILI_NO_ANALYTICS": "true"
-      },
+      "environment": [
+        {
+          "key": "MEILI_URL",
+          "value": "http://search:7700"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${MEILI_MASTER_KEY}"
+        },
+        {
+          "key": "MEILI_NO_ANALYTICS",
+          "value": "true"
+        }
+      ],
       "internalPort": 7700,
       "volumes": [
         {
@@ -62,13 +99,25 @@
     },
     {
       "name": "db",
-      "image": "flomp/wanderer-db:v0.18.0",
-      "environment": {
-        "MEILI_URL": "http://search:7700",
-        "MEILI_MASTER_KEY": "${MEILI_MASTER_KEY}",
-        "POCKETBASE_ENCRYPTION_KEY": "${POCKETBASE_ENCRYPTION_KEY}",
-        "ORIGIN": "https://${APP_DOMAIN:-localhost}"
-      },
+      "image": "flomp/wanderer-db:v0.18.3",
+      "environment": [
+        {
+          "key": "MEILI_URL",
+          "value": "http://search:7700"
+        },
+        {
+          "key": "MEILI_MASTER_KEY",
+          "value": "${MEILI_MASTER_KEY}"
+        },
+        {
+          "key": "POCKETBASE_ENCRYPTION_KEY",
+          "value": "${POCKETBASE_ENCRYPTION_KEY}"
+        },
+        {
+          "key": "ORIGIN",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        }
+      ],
       "internalPort": 8090,
       "volumes": [
         {
