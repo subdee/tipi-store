@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "calibre-web-automated",
+      "image": "crocodilestick/calibre-web-automated:V3.1.4",
+      "isMain": true,
+      "environment": [
+        {
+          "key": "PUID",
+          "value": "1000"
+        },
+        {
+          "key": "PGID",
+          "value": "1000"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        },
+        {
+          "key": "HARDCOVER_TOKEN",
+          "value": "${HARDCOVER_TOKEN}"
+        },
+        {
+          "key": "NETWORK_SHARE_MODE",
+          "value": "false"
+        },
+        {
+          "key": "CWA_PORT_OVERRIDE",
+          "value": "8083"
+        }
+      ],
+      "internalPort": 8083,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/config",
+          "containerPath": "/config",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/ingest",
+          "containerPath": "/cwa-book-ingest",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/library",
+          "containerPath": "/calibre-library",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/plugins",
+          "containerPath": "/config/.config/calibre/plugins",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}

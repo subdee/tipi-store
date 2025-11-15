@@ -1,0 +1,36 @@
+{
+  "name": "Calibre-Web Automated",
+  "id": "calibre-web-automated",
+  "available": true,
+  "short_desc": "Making Calibre-Web your dream, all-in-one self-hosted digital library solution.",
+  "author": "crocodilestick",
+  "port": 8083,
+  "categories": [
+    "social",
+    "data"
+  ],
+  "description": "Calibre-Web Automated aims to be an all-in-one solution, combining the modern lightweight web UI from Calibre-Web with the robust, versatile feature set of Calibre, with a slew of extra features and automations thrown in on top.",
+  "tipi_version": 1,
+  "version": "V3.1.4",
+  "source": "https://github.com/crocodilestick/Calibre-Web-Automated",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1763196442000,
+  "updated_at": 1763196442000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Hardcover token",
+      "env_variable": "HARDCOVER_TOKEN"
+    },
+    {
+      "type": "text",
+      "label": "Your timezone",
+      "env_variable": "TZ"
+    }
+  ]
+}
