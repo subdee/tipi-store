@@ -10,7 +10,7 @@
     "data"
   ],
   "description": "Calibre-Web Automated aims to be an all-in-one solution, combining the modern lightweight web UI from Calibre-Web with the robust, versatile feature set of Calibre, with a slew of extra features and automations thrown in on top.",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "V3.1.4",
   "source": "https://github.com/crocodilestick/Calibre-Web-Automated",
   "exposable": true,
