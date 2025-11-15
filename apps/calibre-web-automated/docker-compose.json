@@ -55,6 +55,13 @@
           "private": false
         },
         {
+          "hostPath": "${ROOT_FOLDER_HOST}/media/data/books",
+          "containerPath": "/books",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
           "hostPath": "${APP_DATA_DIR}/plugins",
           "containerPath": "/config/.config/calibre/plugins",
           "readOnly": false,
