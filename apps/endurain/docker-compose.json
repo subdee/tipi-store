@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/joaovitoriasilva/endurain:v0.15.6",
+      "image": "ghcr.io/joaovitoriasilva/endurain:v0.15.9",
       "isMain": true,
       "environment": [
         {
