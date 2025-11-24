@@ -1,0 +1,49 @@
+{
+  "name": "Authelia",
+  "id": "authelia",
+  "available": true,
+  "exposable": true,
+  "dynamic_config": true,
+  "port": 9091,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "authelia_jwt_secret",
+      "max": 64,
+      "min": 64,
+      "required": true,
+      "env_variable": "AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET"
+    },
+    {
+      "type": "text",
+      "label": "authelia_session_secret",
+      "max": 64,
+      "min": 64,
+      "required": true,
+      "env_variable": "AUTHELIA_SESSION_SECRET"
+    },
+    {
+      "type": "text",
+      "label": "authelia_storage_encryption_key",
+      "max": 64,
+      "min": 64,
+      "required": true,
+      "env_variable": "AUTHELIA_STORAGE_ENCRYPTION_KEY"
+    }
+  ],
+  "tipi_version": 1,
+  "version": "4.39.14",
+  "categories": [
+    "security"
+  ],
+  "description": "Authelia is an open-source authentication and authorization server providing two-factor authentication and single sign-on (SSO) for your applications via a web portal.",
+  "short_desc": "Authelia",
+  "author": "clems4ever",
+  "source": "https://github.com/authelia/authelia",
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1691943801422,
+  "updated_at": 1731953831000
+}
