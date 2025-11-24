@@ -8,7 +8,7 @@
   "form_fields": [
     {
       "type": "text",
-      "label": "authelia_jwt_secret",
+      "label": "JWT Secret",
       "max": 64,
       "min": 64,
       "required": true,
@@ -16,7 +16,7 @@
     },
     {
       "type": "text",
-      "label": "authelia_session_secret",
+      "label": "Session Secret",
       "max": 64,
       "min": 64,
       "required": true,
@@ -24,7 +24,7 @@
     },
     {
       "type": "text",
-      "label": "authelia_storage_encryption_key",
+      "label": "Storage Encryption Key",
       "max": 64,
       "min": 64,
       "required": true,
