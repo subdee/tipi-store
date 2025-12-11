@@ -11,16 +11,8 @@
           "value": "http://server:8000"
         },
         {
-          "key": "ORIGIN",
-          "value": "https://${APP_DOMAIN:-localhost}"
-        },
-        {
           "key": "BODY_SIZE_LIMIT",
-          "value": "100M"
-        },
-        {
-          "key": "FRONTEND_PORT",
-          "value": "8015"
+          "value": "100000"
         }
       ],
       "dependsOn": [
@@ -81,11 +73,11 @@
         },
         {
           "key": "PUBLIC_URL",
-          "value": "https://tipi.subdee.net:8016"
+          "value": "https://${APP_DOMAIN:-localhost}"
         },
         {
           "key": "CSRF_TRUSTED_ORIGINS",
-          "value": "https://${APP_DOMAIN:-localhost},http://localhost:8016"
+          "value": "https://${APP_DOMAIN:-localhost}"
         },
         {
           "key": "DEBUG",
