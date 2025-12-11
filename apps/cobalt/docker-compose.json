@@ -13,9 +13,9 @@
       ],
       "internalPort": 9000,
       "readOnly": true,
-      "extraLabels": [
-        "com.centurylinklabs.watchtower.scope=cobalt"
-      ]
+      "extraLabels": {
+        "0": "com.centurylinklabs.watchtower.scope=cobalt"
+      }
     },
     {
       "name": "watchtower",
