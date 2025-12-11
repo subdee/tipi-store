@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "cobalt",
+      "image": "ghcr.io/imputnet/cobalt:11",
+      "isMain": true,
+      "environment": [
+        {
+          "key": "API_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        }
+      ],
+      "internalPort": 9000,
+      "readOnly": true,
+      "extraLabels": [
+        "com.centurylinklabs.watchtower.scope=cobalt"
+      ]
+    },
+    {
+      "name": "watchtower",
+      "image": "ghcr.io/containrrr/watchtower",
+      "command": "--cleanup --scope cobalt --interval 900 --include-restarting",
+      "volumes": [
+        {
+          "hostPath": "/var/run/docker.sock",
+          "containerPath": "/var/run/docker.sock",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "cobalt",
+  "id": "cobalt",
+  "available": true,
+  "short_desc": " best way to save what you love",
+  "author": "seanmorley15",
+  "port": 9000,
+  "categories": [
+    "utilities"
+  ],
+  "description": "cobalt is a media downloader that doesn't piss you off. it's friendly, efficient, and doesn't have ads, trackers, paywalls or other nonsense.",
+  "tipi_version": 1,
+  "version": "11",
+  "source": "https://github.com/imputnet/cobalt",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": []
+}
