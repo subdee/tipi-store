@@ -98,6 +98,22 @@
         {
           "key": "BACKEND_PORT",
           "value": "8016"
+        },
+        {
+          "key": "PGHOST",
+          "value": "db"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "database"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "adventure"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${DB_PASSWORD:-adventure123}"
         }
       ],
       "volumes": [
