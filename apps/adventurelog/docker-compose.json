@@ -4,6 +4,7 @@
     {
       "name": "frontend",
       "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.11.0",
+      "isMain": true,
       "internalPort": 3000,
       "environment": [
         {
