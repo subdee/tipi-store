@@ -37,7 +37,7 @@
         },
         {
           "key": "POSTGRES_DB",
-          "value": "database"
+          "value": "adventurelog"
         },
         {
           "key": "POSTGRES_USER",
@@ -50,7 +50,7 @@
       ],
       "volumes": [
         {
-          "hostPath": "${APP_DATA_DIR}/postgres_data",
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
           "containerPath": "/var/lib/postgresql/data/",
           "readOnly": false,
           "shared": false,
@@ -105,7 +105,7 @@
         },
         {
           "key": "POSTGRES_DB",
-          "value": "database"
+          "value": "adventurelog"
         },
         {
           "key": "POSTGRES_USER",
