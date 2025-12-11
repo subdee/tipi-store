@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "frontend",
+      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.11.0",
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "PUBLIC_SERVER_URL",
+          "value": "http://server:8000"
+        },
+        {
+          "key": "ORIGIN",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "BODY_SIZE_LIMIT",
+          "value": "100M"
+        },
+        {
+          "key": "FRONTEND_PORT",
+          "value": "8015"
+        }
+      ],
+      "dependsOn": [
+        "backend"
+      ]
+    },
+    {
+      "name": "db",
+      "image": "postgis/postgis:16-3.5",
+      "environment": [
+        {
+          "key": "PGHOST",
+          "value": "db"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "database"
+        },
+        {
+          "key": "POSTGRES_USER",
+          "value": "adventure"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${DB_PASSWORD:-adventure123}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/postgres_data",
+          "containerPath": "/var/lib/postgresql/data/",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    },
+    {
+      "name": "backend",
+      "image": "ghcr.io/seanmorley15/adventurelog-backend:v0.11.0",
+      "internalPort": 80,
+      "environment": [
+        {
+          "key": "SECRET_KEY",
+          "value": "${SECRET_KEY:-adventure9secretkey}"
+        },
+        {
+          "key": "DJANGO_ADMIN_USERNAME",
+          "value": "admin"
+        },
+        {
+          "key": "DJANGO_ADMIN_PASSWORD",
+          "value": "${ADMIN_PASSWORD:-admin123}"
+        },
+        {
+          "key": "DJANGO_ADMIN_EMAIL",
+          "value": "admin@example.com"
+        },
+        {
+          "key": "PUBLIC_URL",
+          "value": "https://tipi.subdee.net:8016"
+        },
+        {
+          "key": "CSRF_TRUSTED_ORIGINS",
+          "value": "https://${APP_DOMAIN:-localhost},http://localhost:8016"
+        },
+        {
+          "key": "DEBUG",
+          "value": "False"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "BACKEND_PORT",
+          "value": "8016"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/adventurelog_media",
+          "containerPath": "/code/media/",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": [
+        "db"
+      ]
+    }
+  ]
+}

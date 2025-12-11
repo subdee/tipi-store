@@ -1,0 +1,41 @@
+{
+  "name": "AdventureLog",
+  "id": "adventurelog",
+  "available": true,
+  "short_desc": "The ultimate travel companion.",
+  "author": "seanmorley15",
+  "port": 8015,
+  "categories": [
+    "social",
+    "data"
+  ],
+  "description": "AdventureLog is the ultimate travel companion. Discover new places, track your adventures, and share your experiences with friends and family.",
+  "tipi_version": 1,
+  "version": "v0.11.0",
+  "source": "https://github.com/seanmorley15/AdventureLog",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Secret key",
+      "env_variable": "SECRET_KEY"
+    },
+    {
+      "type": "text",
+      "label": "Admin password",
+      "env_variable": "ADMIN_PASSWORD"
+    },
+    {
+      "type": "text",
+      "label": "Database password",
+      "env_variable": "DB_PASSWORD"
+    }
+  ]
+}
