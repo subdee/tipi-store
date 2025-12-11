@@ -9,7 +9,7 @@
       "environment": [
         {
           "key": "PUBLIC_SERVER_URL",
-          "value": "http://server:8000"
+          "value": "http://backend:8000"
         },
         {
           "key": "BODY_SIZE_LIMIT",
