@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "zerobyte",
+      "image": "ghcr.io/nicotsx/zerobyte:v0.20",
+      "isMain": true,
+      "environment": [
+        {
+          "key": "TZ",
+          "value": "${TIMEZONE}"
+        }
+      ],
+      "internalPort": 4096,
+      "volumes": [
+        {
+          "hostPath": "/etc/localtime",
+          "containerPath": "/etc/localtime",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/var/lib/zerobyte",
+          "containerPath": "/var/lib/zerobyte",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${ROOT_FOLDER_HOST}/",
+          "containerPath": "/runtipi",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}

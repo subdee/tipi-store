@@ -1,0 +1,30 @@
+{
+  "name": "Zerobyte",
+  "id": "zerobyte",
+  "available": true,
+  "short_desc": "Powerful backup automation for your remote storage",
+  "author": "nicotsx",
+  "port": 4096,
+  "categories": [
+    "utilities"
+  ],
+  "description": "Zerobyte is a backup automation tool that helps you save your data across multiple storage backends. Built on top of Restic, it provides an modern web interface to schedule, manage, and monitor encrypted backups of your remote storage.",
+  "tipi_version": 1,
+  "version": "0.20",
+  "source": "https://github.com/nicotsx/zerobyte",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "string",
+      "label": "Timezone",
+      "env_variable": "TIMEZONE"
+    }
+  ]
+}

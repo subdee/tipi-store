@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "papra",
+      "image": "ghcr.io/papra-hq/papra:0.4.0-rootless",
+      "isMain": true,
+      "environment": [
+        {
+          "key": "AUTH_SECRET",
+          "value": "${AUTH_SECRET}"
+        },
+        {
+          "key": "APP_BASE_URL",
+          "value": "https://${APP_DOMAIN}"
+        },
+        {
+          "key": "INGESTION_FOLDER_IS_ENABLED",
+          "value": "${ENABLE_INGESTION}"
+        }
+      ],
+      "internalPort": 1221,
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/app-data",
+          "containerPath": "/app/app-data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/ingestion",
+          "containerPath": "/app/ingestion",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "user": "1000:1000"
+    }
+  ]
+}

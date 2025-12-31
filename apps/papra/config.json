@@ -1,0 +1,35 @@
+{
+  "name": "Papra",
+  "id": "papra",
+  "available": true,
+  "short_desc": "The minimalistic document archiving platform",
+  "author": "papra-hq",
+  "port": 1221,
+  "categories": [
+    "data"
+  ],
+  "description": "Papra is a minimalistic document management and archiving platform. It is designed to be simple to use and accessible to everyone. Papra is a platform for long-term document storage and management, like a digital archive for your documents.",
+  "tipi_version": 1,
+  "version": "0.4.0",
+  "source": "https://github.com/papra-hq/papra",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Auth secret",
+      "env_variable": "AUTH_SECRET"
+    },
+    {
+      "type": "boolean",
+      "label": "Enable ingestion?",
+      "env_variable": "ENABLE_INGESTION"
+    }
+  ]
+}
