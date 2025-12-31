@@ -17,6 +17,10 @@
         {
           "key": "INGESTION_FOLDER_IS_ENABLED",
           "value": "${ENABLE_INGESTION}"
+        },
+        {
+          "key": "TRUSTED_ORIGINS",
+          "value": "https://${APP_DOMAIN}"
         }
       ],
       "internalPort": 1221,
