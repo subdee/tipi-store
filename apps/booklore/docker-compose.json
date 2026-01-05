@@ -5,6 +5,7 @@
       "name": "booklore",
       "image": "booklore/booklore:v1.16.5",
       "isMain": true,
+      "internalPort": 6060,
       "environment": [
         {
           "key": "USER_ID",
