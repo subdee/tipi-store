@@ -58,11 +58,9 @@
           "private": false
         }
       ],
-      "dependsOn": {
-        "mariadb": {
-          "condition": "service_healthy"
-        }
-      }
+      "dependsOn": [
+        "mariadb"
+      ]
     },
     {
       "name": "mariadb",
@@ -105,13 +103,7 @@
           "shared": false,
           "private": false
         }
-      ],
-      "healthCheck": {
-        "test": "CMD mariadb-admin ping -h localhost",
-        "interval": "5s",
-        "timeout": "5s",
-        "retries": 10
-      }
+      ]
     }
   ]
 }
