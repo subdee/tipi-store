@@ -1,0 +1,35 @@
+{
+  "name": "Booklore",
+  "id": "booklore",
+  "available": true,
+  "short_desc": "The modern way to organize, search, and preserve your knowledge.",
+  "author": "booklore-app",
+  "port": 6060,
+  "categories": [
+    "data"
+  ],
+  "description": "The modern way to organize, search, and preserve your knowledge. Build your digital library with ease.",
+  "tipi_version": 1,
+  "version": "v1.16.5",
+  "source": "https://github.com/booklore-app/booklore",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1753187483000,
+  "updated_at": 1753187483000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Timezone",
+      "env_variable": "TZ"
+    },
+    {
+      "type": "text",
+      "label": "Database password",
+      "env_variable": "DB_PASSWORD"
+    }
+  ]
+}

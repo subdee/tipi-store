@@ -22,7 +22,7 @@
   "dynamic_config": true,
   "form_fields": [
     {
-      "type": "string",
+      "type": "text",
       "label": "Timezone",
       "env_variable": "TIMEZONE"
     }
