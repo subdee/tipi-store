@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "papra",
-      "image": "ghcr.io/papra-hq/papra:0.4.0-rootless",
+      "image": "ghcr.io/papra-hq/papra:26.0.0-rootless",
       "isMain": true,
       "environment": [
         {
