@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.11.0",
+      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.12.0",
       "isMain": true,
       "internalPort": 3000,
       "environment": [
@@ -53,7 +53,7 @@
     },
     {
       "name": "backend",
-      "image": "ghcr.io/seanmorley15/adventurelog-backend:v0.11.0",
+      "image": "ghcr.io/seanmorley15/adventurelog-backend:v0.12.0",
       "internalPort": 80,
       "environment": [
         {

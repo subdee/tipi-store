@@ -10,8 +10,8 @@
     "data"
   ],
   "description": "AdventureLog is the ultimate travel companion. Discover new places, track your adventures, and share your experiences with friends and family.",
-  "tipi_version": 3,
-  "version": "v0.11.0",
+  "tipi_version": 4,
+  "version": "v0.12.0",
   "source": "https://github.com/seanmorley15/AdventureLog",
   "exposable": true,
   "supported_architectures": [
