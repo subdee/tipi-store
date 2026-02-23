@@ -9,8 +9,8 @@
     "data"
   ],
   "description": "The modern way to organize, search, and preserve your knowledge. Build your digital library with ease.",
-  "tipi_version": 4,
-  "version": "v1.18.3",
+  "tipi_version": 5,
+  "version": "v2.0.0",
   "source": "https://github.com/booklore-app/booklore",
   "exposable": true,
   "supported_architectures": [

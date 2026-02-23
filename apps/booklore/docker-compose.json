@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "booklore",
-      "image": "booklore/booklore:v1.18.3",
+      "image": "booklore/booklore:v2.0.0",
       "isMain": true,
       "internalPort": 6060,
       "environment": [

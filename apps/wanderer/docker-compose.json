@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "web",
-      "image": "flomp/wanderer-web:v0.18.4",
+      "image": "flomp/wanderer-web:v0.18.5",
       "isMain": true,
       "environment": [
         {
@@ -99,7 +99,7 @@
     },
     {
       "name": "db",
-      "image": "flomp/wanderer-db:v0.18.4",
+      "image": "flomp/wanderer-db:v0.18.5",
       "environment": [
         {
           "key": "MEILI_URL",
