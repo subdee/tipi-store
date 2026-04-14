@@ -9,8 +9,8 @@
     "utilities"
   ],
   "description": "Zerobyte is a backup automation tool that helps you save your data across multiple storage backends. Built on top of Restic, it provides an modern web interface to schedule, manage, and monitor encrypted backups of your remote storage.",
-  "tipi_version": 3,
-  "version": "0.32.1",
+  "tipi_version": 4,
+  "version": "0.34.0",
   "source": "https://github.com/nicotsx/zerobyte",
   "exposable": true,
   "supported_architectures": [
