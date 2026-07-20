@@ -4,9 +4,8 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 
 ## Apps available
 
-- [Plant-It](https://plant-it.org) - Plant management
-- [Wallos](https://wallosapp.com/) - Subscription management
 - [Wanderer](https://wanderer.to/) - Trail database
+- [TREK](https://github.com/mauriceboe/TREK) - Self-hosted travel planner
 
 ## Installation
 

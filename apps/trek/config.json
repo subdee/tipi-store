@@ -1,0 +1,34 @@
+{
+  "name": "TREK",
+  "id": "trek",
+  "available": true,
+  "short_desc": "Self-hosted travel and trip planner with real-time collaboration",
+  "author": "liketrek",
+  "port": 3000,
+  "categories": [
+    "social"
+  ],
+  "description": "TREK is a self-hosted travel and trip planner with real-time collaboration, interactive maps, PWA support, SSO, budgets, packing lists and more. Plan your trips, organise itineraries and collaborate with fellow travellers, all from your own server.",
+  "tipi_version": 1,
+  "version": "3.4.1",
+  "source": "https://github.com/liketrek/TREK",
+  "website": "https://liketrek.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1784494800000,
+  "updated_at": 1784494800000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Encryption key",
+      "hint": "Used to encrypt stored secrets (API keys, MFA, SMTP, OIDC) at rest. Equivalent to `openssl rand -hex 32`.",
+      "env_variable": "ENCRYPTION_KEY",
+      "min": 64,
+      "encoding": "hex"
+    }
+  ]
+}

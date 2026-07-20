@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "trek",
+      "image": "mauriceboe/trek:3.4.1",
+      "isMain": true,
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "NODE_ENV",
+          "value": "production"
+        },
+        {
+          "key": "PORT",
+          "value": "3000"
+        },
+        {
+          "key": "ENCRYPTION_KEY",
+          "value": "${ENCRYPTION_KEY}"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        },
+        {
+          "key": "LOG_LEVEL",
+          "value": "info"
+        },
+        {
+          "key": "APP_URL",
+          "value": "https://${APP_DOMAIN}"
+        },
+        {
+          "key": "TRUST_PROXY",
+          "value": "1"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/app/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/uploads",
+          "containerPath": "/app/uploads",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}
