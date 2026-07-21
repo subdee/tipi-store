@@ -36,12 +36,12 @@
       "automerge": false
     },
     {
+      "description": "Backing services are pinned to the version each upstream app expects; do not auto-update them. Docker datasource reports names with a registry/namespace prefix (e.g. docker.io/postgres, postgis/postgis, getmeili/meilisearch), so match on a trailing path segment.",
+      "matchDatasources": [
+        "docker"
+      ],
       "matchPackageNames": [
-        "mariadb",
-        "mysql",
-        "mongodb",
-        "postgres",
-        "redis"
+        "/(^|/)(mariadb|mysql|mongodb|postgres|postgis|redis|meilisearch)$/"
       ],
       "enabled": false
     }
