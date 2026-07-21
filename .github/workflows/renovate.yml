@@ -39,7 +39,8 @@ jobs:
       - name: Install node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          # Renovate (v43+) requires Node >= 24.11.0
+          node-version: '24'
 
       - name: Install bun
         uses: oven-sh/setup-bun@v2
