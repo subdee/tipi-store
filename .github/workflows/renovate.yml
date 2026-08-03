@@ -28,6 +28,9 @@ concurrency:
 permissions:
   contents: write
   pull-requests: write
+  # Renovate maintains its Dependency Dashboard as an issue; without this it
+  # fails ensureIssue() with "integration-unauthorized".
+  issues: write
 
 jobs:
   renovate:
