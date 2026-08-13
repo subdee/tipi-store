@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.12.1",
+      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.13.0",
       "isMain": true,
       "internalPort": 3000,
       "environment": [
