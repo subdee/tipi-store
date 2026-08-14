@@ -1,0 +1,35 @@
+{
+  "name": "Aeterna",
+  "id": "aeterna",
+  "available": true,
+  "short_desc": "Lightweight self-hosted dead man's switch",
+  "author": "alpyxn",
+  "port": 5000,
+  "categories": [
+    "utilities",
+    "security"
+  ],
+  "description": "Aeterna is a self-hosted dead man's switch. You write messages, optionally with file attachments, and check in regularly. If you stop checking in, Aeterna delivers those messages by email to the people you chose. Messages and attachments are encrypted at rest with AES-256-GCM, attachments are deleted from the server right after delivery, and webhooks can trigger external services when a switch fires.",
+  "tipi_version": 1,
+  "version": "v1.5.0",
+  "source": "https://github.com/alpyxn/aeterna",
+  "website": "https://alpyxn.github.io/aeterna/",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1786482000000,
+  "updated_at": 1786482000000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "url",
+      "label": "Public URL",
+      "hint": "Full URL where Aeterna is reachable, without a trailing slash (e.g. https://aeterna.example.com or http://192.168.1.10:5000). Used for the check-in links inside emails and for the allowed CORS origin.",
+      "placeholder": "https://aeterna.example.com",
+      "env_variable": "AETERNA_PUBLIC_URL",
+      "required": true
+    }
+  ]
+}

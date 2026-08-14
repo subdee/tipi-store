@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "frontend",
+      "image": "ghcr.io/alpyxn/aeterna-frontend:v1.5.0",
+      "isMain": true,
+      "internalPort": 80,
+      "environment": [
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "dependsOn": {
+        "backend": {
+          "condition": "service_started"
+        }
+      }
+    },
+    {
+      "name": "backend",
+      "image": "ghcr.io/alpyxn/aeterna-backend:v1.5.0",
+      "internalPort": 3000,
+      "command": [
+        "sh",
+        "-c",
+        "set -e; mkdir -p /run/secrets; if [ ! -s /run/secrets/encryption_key ]; then head -c 32 /dev/urandom | base64 > /run/secrets/encryption_key; fi; chmod 600 /run/secrets/encryption_key; exec ./main"
+      ],
+      "environment": [
+        {
+          "key": "ENV",
+          "value": "production"
+        },
+        {
+          "key": "DATABASE_PATH",
+          "value": "/app/data/aeterna.db"
+        },
+        {
+          "key": "BASE_URL",
+          "value": "${AETERNA_PUBLIC_URL}"
+        },
+        {
+          "key": "ALLOWED_ORIGINS",
+          "value": "${AETERNA_PUBLIC_URL}"
+        },
+        {
+          "key": "LOG_LEVEL",
+          "value": "info"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/app",
+          "containerPath": "/app/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/secrets",
+          "containerPath": "/run/secrets",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}

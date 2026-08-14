@@ -5,6 +5,7 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 ## Apps available
 
 - [AdventureLog](https://github.com/seanmorley15/AdventureLog) - The ultimate travel companion
+- [Aeterna](https://github.com/alpyxn/aeterna) - Lightweight self-hosted dead man's switch
 - [Calibre-Web Automated](https://github.com/crocodilestick/Calibre-Web-Automated) - All-in-one self-hosted digital library
 - [Endurain](https://docs.endurain.com/) - Self-hosted fitness tracking service
 - [Papra](https://github.com/papra-hq/papra) - Minimalistic document archiving platform
