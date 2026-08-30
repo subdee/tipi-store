@@ -8,6 +8,7 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 - [Aeterna](https://github.com/alpyxn/aeterna) - Lightweight self-hosted dead man's switch
 - [Calibre-Web Automated](https://github.com/crocodilestick/Calibre-Web-Automated) - All-in-one self-hosted digital library
 - [Endurain](https://docs.endurain.com/) - Self-hosted fitness tracking service
+- [openGym](https://gitlab.com/DuarteSantos8/opengym) - Self-hosted gym and body-weight tracker
 - [Papra](https://github.com/papra-hq/papra) - Minimalistic document archiving platform
 - [TREK](https://github.com/liketrek/TREK) - Self-hosted travel and trip planner
 - [Wanderer](https://wanderer.to/) - Trail database

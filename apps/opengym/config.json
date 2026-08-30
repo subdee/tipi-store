@@ -1,0 +1,50 @@
+{
+  "name": "openGym",
+  "id": "opengym",
+  "available": true,
+  "short_desc": "Self-hosted gym and body-weight tracker",
+  "author": "DuarteSantos8",
+  "port": 8084,
+  "categories": [
+    "utilities",
+    "data"
+  ],
+  "description": "openGym is a self-hosted gym and body-weight tracker. Plan a routine per weekday over a library of 1324 exercises with animated demos, run guided sessions with rest timers, supersets, warm-up sets and automatic progression (linear, Greyskull LP, double progression), and track your estimated 1RM, body weight and training volume over time. Each profile signs in with a passkey and syncs across devices, data is stored as plain JSON files you can back up, and there is no telemetry.",
+  "tipi_version": 1,
+  "version": "1.2.11",
+  "source": "https://gitlab.com/DuarteSantos8/opengym",
+  "website": "https://opengym.duarte-santos.ch",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1788048000000,
+  "updated_at": 1788048000000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "url",
+      "label": "Public URL",
+      "hint": "Full URL you open openGym with, without a trailing slash (e.g. https://gym.example.com or http://192.168.1.10:8084). Passkeys are bound to it, so it must match exactly.",
+      "placeholder": "https://gym.example.com",
+      "env_variable": "OPENGYM_ORIGIN",
+      "required": true
+    },
+    {
+      "type": "text",
+      "label": "Passkey hostname",
+      "hint": "Hostname part of the public URL, with no scheme, port or path (e.g. gym.example.com). Browsers only allow passkeys over HTTPS, with localhost as the one exception.",
+      "placeholder": "gym.example.com",
+      "env_variable": "OPENGYM_RP_ID",
+      "required": true
+    },
+    {
+      "type": "text",
+      "label": "Admin user IDs",
+      "hint": "Optional, comma-separated. Enables the admin dashboard for those profiles. Register your passkey first, then take your id from data/app/db.json (users[].id).",
+      "env_variable": "OPENGYM_ADMIN_UIDS",
+      "required": false
+    }
+  ]
+}

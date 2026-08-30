@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "web",
+      "image": "registry.gitlab.com/duartesantos8/opengym/web:1.2.11",
+      "isMain": true,
+      "internalPort": 80,
+      "environment": [
+        {
+          "key": "NGINX_PORT",
+          "value": "80"
+        },
+        {
+          "key": "BACKEND",
+          "value": "api"
+        },
+        {
+          "key": "PORT",
+          "value": "3000"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/media/img",
+          "containerPath": "/usr/share/nginx/html/img",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/media/gif",
+          "containerPath": "/usr/share/nginx/html/gif",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": {
+        "media": {
+          "condition": "service_completed_successfully"
+        },
+        "api": {
+          "condition": "service_started"
+        }
+      }
+    },
+    {
+      "name": "api",
+      "image": "registry.gitlab.com/duartesantos8/opengym/api:1.2.11",
+      "internalPort": 3000,
+      "environment": [
+        {
+          "key": "PORT",
+          "value": "3000"
+        },
+        {
+          "key": "DATA_DIR",
+          "value": "/data"
+        },
+        {
+          "key": "ORIGIN",
+          "value": "${OPENGYM_ORIGIN}"
+        },
+        {
+          "key": "RP_ID",
+          "value": "${OPENGYM_RP_ID}"
+        },
+        {
+          "key": "RP_NAME",
+          "value": "openGym"
+        },
+        {
+          "key": "ADMIN_UIDS",
+          "value": "${OPENGYM_ADMIN_UIDS:-}"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/app",
+          "containerPath": "/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    },
+    {
+      "name": "media",
+      "image": "alpine/git:2.54.0",
+      "restart": "no",
+      "entrypoint": [
+        "/bin/sh",
+        "-c"
+      ],
+      "command": [
+        "set -e; if [ -f /out/.fetched ]; then echo 'Exercise media already present - skipping download.'; exit 0; fi; echo 'Downloading exercise media (~140 MB, one time) from github.com/hasaneyldrm/exercises-dataset'; mkdir -p /out/img /out/gif; git clone --depth 1 https://github.com/hasaneyldrm/exercises-dataset /tmp/ds; cp /tmp/ds/images/*.jpg /out/img/; cp /tmp/ds/videos/*.gif /out/gif/; touch /out/.fetched; echo 'Exercise media ready.'"
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/media",
+          "containerPath": "/out",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ]
+    }
+  ]
+}
