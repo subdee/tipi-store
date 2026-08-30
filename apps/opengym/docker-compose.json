@@ -41,9 +41,6 @@
         }
       ],
       "dependsOn": {
-        "media": {
-          "condition": "service_completed_successfully"
-        },
         "api": {
           "condition": "service_started"
         }
