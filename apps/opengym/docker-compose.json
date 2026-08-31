@@ -44,12 +44,26 @@
         "api": {
           "condition": "service_started"
         }
+      },
+      "healthCheck": {
+        "test": "wget --spider -q http://127.0.0.1:80/ || exit 1",
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "startPeriod": "40s"
       }
     },
     {
       "name": "api",
       "image": "registry.gitlab.com/duartesantos8/opengym/api:1.2.11",
       "internalPort": 3000,
+      "healthCheck": {
+        "test": "wget --spider -q http://127.0.0.1:3000/api/health || exit 1",
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 3,
+        "startPeriod": "40s"
+      },
       "environment": [
         {
           "key": "PORT",
@@ -93,13 +107,13 @@
     {
       "name": "media",
       "image": "alpine/git:2.54.0",
-      "restart": "no",
+      "restart": "unless-stopped",
       "entrypoint": [
         "/bin/sh",
         "-c"
       ],
       "command": [
-        "set -e; if [ -f /out/.fetched ]; then echo 'Exercise media already present - skipping download.'; exit 0; fi; echo 'Downloading exercise media (~140 MB, one time) from github.com/hasaneyldrm/exercises-dataset'; mkdir -p /out/img /out/gif; git clone --depth 1 https://github.com/hasaneyldrm/exercises-dataset /tmp/ds; cp /tmp/ds/images/*.jpg /out/img/; cp /tmp/ds/videos/*.gif /out/gif/; touch /out/.fetched; echo 'Exercise media ready.'"
+        "set -e; if [ -f /out/.fetched ]; then echo 'Exercise media already present - skipping download.'; else echo 'Downloading exercise media (~140 MB, one time) from github.com/hasaneyldrm/exercises-dataset'; mkdir -p /out/img /out/gif; git clone --depth 1 https://github.com/hasaneyldrm/exercises-dataset /tmp/ds; cp /tmp/ds/images/*.jpg /out/img/; cp /tmp/ds/videos/*.gif /out/gif/; rm -rf /tmp/ds; touch /out/.fetched; echo 'Exercise media ready.'; fi; exec sleep infinity"
       ],
       "volumes": [
         {
