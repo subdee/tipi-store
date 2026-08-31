@@ -7,6 +7,7 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 - [AdventureLog](https://github.com/seanmorley15/AdventureLog) - The ultimate travel companion
 - [Aeterna](https://github.com/alpyxn/aeterna) - Lightweight self-hosted dead man's switch
 - [Calibre-Web Automated](https://github.com/crocodilestick/Calibre-Web-Automated) - All-in-one self-hosted digital library
+- [Donetick](https://github.com/donetick/donetick) - Task and chore manager for you and your household
 - [Endurain](https://docs.endurain.com/) - Self-hosted fitness tracking service
 - [openGym](https://gitlab.com/DuarteSantos8/opengym) - Self-hosted gym and body-weight tracker
 - [Papra](https://github.com/papra-hq/papra) - Minimalistic document archiving platform

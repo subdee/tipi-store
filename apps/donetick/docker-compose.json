@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "donetick",
+      "image": "donetick/donetick:v0.1.79",
+      "isMain": true,
+      "internalPort": 2021,
+      "environment": [
+        {
+          "key": "DT_ENV",
+          "value": "selfhosted"
+        },
+        {
+          "key": "DT_SQLITE_PATH",
+          "value": "/donetick-data/donetick.db"
+        },
+        {
+          "key": "DT_JWT_SECRET",
+          "value": "${DONETICK_JWT_SECRET}"
+        },
+        {
+          "key": "DT_SERVER_PUBLIC_HOST",
+          "value": "${DONETICK_PUBLIC_HOST:-}"
+        },
+        {
+          "key": "DONETICK_DISABLE_SIGNUP",
+          "value": "${DONETICK_DISABLE_SIGNUP:-false}"
+        },
+        {
+          "key": "DONETICK_TELEGRAM_TOKEN",
+          "value": "${DONETICK_TELEGRAM_TOKEN:-}"
+        },
+        {
+          "key": "DONETICK_PUSHOVER_TOKEN",
+          "value": "${DONETICK_PUSHOVER_TOKEN:-}"
+        },
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/donetick-data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "wget --no-verbose --tries=1 --spider http://localhost:2021/api/v1/health || exit 1",
+        "interval": "1m",
+        "timeout": "5s",
+        "retries": 3,
+        "startPeriod": "1m"
+      }
+    }
+  ]
+}

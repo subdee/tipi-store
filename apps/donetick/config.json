@@ -1,0 +1,63 @@
+{
+  "name": "Donetick",
+  "id": "donetick",
+  "available": true,
+  "short_desc": "Task and chore manager for you and your household",
+  "author": "donetick",
+  "port": 2021,
+  "categories": [
+    "utilities",
+    "automation"
+  ],
+  "description": "Donetick is an open-source task and chore manager for yourself or a shared household. Create tasks in plain English and it works out the due date and recurrence, or set up advanced schedules with adaptive due dates, assignee rotation and subtasks that reset on completion. Organise with labels and priorities, track points and completion history, trigger tasks from NFC tags, and get reminders through Telegram, Discord or Pushover. Supports local accounts or any OIDC provider, with a REST API and webhooks for automations, and a Home Assistant integration.",
+  "tipi_version": 1,
+  "version": "v0.1.79",
+  "source": "https://github.com/donetick/donetick",
+  "website": "https://donetick.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1788134400000,
+  "updated_at": 1788134400000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "JWT secret",
+      "hint": "Signs the session tokens. Donetick refuses to start with a weak secret, and changing it later signs everyone out.",
+      "env_variable": "DONETICK_JWT_SECRET",
+      "min": 64,
+      "encoding": "hex"
+    },
+    {
+      "type": "url",
+      "label": "Public URL",
+      "hint": "Optional. Full URL you open Donetick with, without a trailing slash (e.g. https://tasks.example.com). Used for the links in password reset emails and for the OAuth2 redirect.",
+      "placeholder": "https://tasks.example.com",
+      "env_variable": "DONETICK_PUBLIC_HOST",
+      "required": false
+    },
+    {
+      "type": "boolean",
+      "label": "Disable new signups?",
+      "hint": "Turn this on after you have created your accounts, so nobody else can register on the instance.",
+      "env_variable": "DONETICK_DISABLE_SIGNUP"
+    },
+    {
+      "type": "text",
+      "label": "Telegram bot token",
+      "hint": "Optional. Token from @BotFather, enables task reminders over Telegram.",
+      "env_variable": "DONETICK_TELEGRAM_TOKEN",
+      "required": false
+    },
+    {
+      "type": "text",
+      "label": "Pushover token",
+      "hint": "Optional. Application token from Pushover, enables task reminders over Pushover.",
+      "env_variable": "DONETICK_PUSHOVER_TOKEN",
+      "required": false
+    }
+  ]
+}
