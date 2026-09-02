@@ -9,8 +9,8 @@
     "data"
   ],
   "description": "Papra is a minimalistic document management and archiving platform. It is designed to be simple to use and accessible to everyone. Papra is a platform for long-term document storage and management, like a digital archive for your documents.",
-  "tipi_version": 6,
-  "version": "26.6.1-rootless",
+  "tipi_version": 7,
+  "version": "26.6.2",
   "source": "https://github.com/papra-hq/papra",
   "exposable": true,
   "supported_architectures": [
@@ -18,7 +18,7 @@
     "amd64"
   ],
   "created_at": 1753187483000,
-  "updated_at": 1753187483000,
+  "updated_at": 1788332175093,
   "dynamic_config": true,
   "form_fields": [
     {
