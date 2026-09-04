@@ -1,0 +1,26 @@
+{
+  "name": "BentoPDF",
+  "id": "bentopdf",
+  "available": true,
+  "short_desc": "Privacy-first PDF toolkit that runs entirely in your browser",
+  "author": "alam00000",
+  "port": 8087,
+  "categories": [
+    "utilities",
+    "data"
+  ],
+  "description": "BentoPDF is a self-hosted PDF toolkit with over 100 tools: merge, split, organise, rotate and crop pages, annotate and redact, edit text, fill and create forms, sign documents, add watermarks, page numbers and bookmarks, convert to and from images, Office and e-book formats, OCR scanned documents, and encrypt, compress or sanitise files. Every operation runs in your browser with WebAssembly, so the documents you work on never leave your machine and the container only serves static files.",
+  "tipi_version": 1,
+  "version": "v2.8.8",
+  "source": "https://github.com/alam00000/bentopdf",
+  "website": "https://bentopdf.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1788480000000,
+  "updated_at": 1788480000000,
+  "dynamic_config": true,
+  "form_fields": []
+}
