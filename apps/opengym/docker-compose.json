@@ -55,7 +55,7 @@
     },
     {
       "name": "api",
-      "image": "registry.gitlab.com/duartesantos8/opengym/api:1.2.11",
+      "image": "registry.gitlab.com/duartesantos8/opengym/api:1.2.14",
       "internalPort": 3000,
       "healthCheck": {
         "test": "wget --spider -q http://127.0.0.1:3000/api/health || exit 1",
