@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/alpyxn/aeterna-frontend:v1.5.0",
+      "image": "ghcr.io/alpyxn/aeterna-frontend:v1.5.5",
       "isMain": true,
       "internalPort": 80,
       "environment": [
@@ -20,7 +20,7 @@
     },
     {
       "name": "backend",
-      "image": "ghcr.io/alpyxn/aeterna-backend:v1.5.0",
+      "image": "ghcr.io/alpyxn/aeterna-backend:v1.5.5",
       "internalPort": 3000,
       "command": [
         "sh",
