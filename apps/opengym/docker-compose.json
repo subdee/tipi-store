@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "web",
-      "image": "registry.gitlab.com/duartesantos8/opengym/web:1.3.5",
+      "image": "registry.gitlab.com/duartesantos8/opengym/web:1.3.7",
       "isMain": true,
       "internalPort": 80,
       "environment": [
