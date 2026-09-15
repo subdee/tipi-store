@@ -1,0 +1,75 @@
+{
+  "name": "Securo",
+  "id": "securo",
+  "available": true,
+  "short_desc": "Open-source personal finance manager, self-hosted and privacy-first",
+  "author": "securo-finance",
+  "port": 8088,
+  "categories": [
+    "finance",
+    "data"
+  ],
+  "description": "Securo is a self-hosted personal finance manager. Track accounts with running balances, import transactions from OFX, QIF, CAMT and CSV files, auto-categorise them with a rules engine, and follow budgets, recurring transactions, goals and assets over time. Net worth and income-versus-expenses reports come built in, with multi-currency support and automatic FX conversion. Bank sync is optional and provider-based: Enable Banking for roughly 2500 European PSD2 banks, SimpleFIN for US and international banks, Pluggy for Brazilian banks. Multi-user with an admin panel, TOTP two-factor, passkeys and OIDC login, plus an optional self-hosted AI agents feature that can chat over your own data.",
+  "tipi_version": 1,
+  "version": "0.15.1",
+  "source": "https://github.com/securo-finance/securo",
+  "website": "https://usesecuro.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1789483415000,
+  "updated_at": 1789483415000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Secret key",
+      "env_variable": "SECRET_KEY"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "DB_PASSWORD"
+    },
+    {
+      "type": "random",
+      "label": "Agents MCP JWT secret",
+      "env_variable": "MCP_JWT_SECRET"
+    },
+    {
+      "type": "number",
+      "label": "Trusted proxy hops",
+      "env_variable": "TRUSTED_PROXY_HOPS",
+      "default": 1,
+      "min": 1,
+      "max": 5,
+      "hint": "Reverse-proxy hops in front of the API, used to key rate limiting by real client IP. Use 1 when you reach Securo on the host IP and port, 2 when you expose it through Runtipi with a domain."
+    },
+    {
+      "type": "text",
+      "label": "Open Exchange Rates app ID",
+      "env_variable": "OPENEXCHANGERATES_APP_ID",
+      "hint": "Optional free key from openexchangerates.org. Without it, cross-currency amounts fall back to a 1:1 rate with a warning."
+    },
+    {
+      "type": "boolean",
+      "label": "Enable SimpleFIN bank sync?",
+      "env_variable": "SIMPLEFIN_ENABLED",
+      "hint": "Read-only bank sync for US and international banks. Each connection brings its own setup token from bridge.simplefin.org, so there is nothing else to configure."
+    },
+    {
+      "type": "text",
+      "label": "Enable Banking application ID",
+      "env_variable": "ENABLE_BANKING_APP_ID",
+      "hint": "Optional PSD2 bank sync for European banks. Also put the application's PEM key at <app data>/secrets/enable_banking_private.pem."
+    },
+    {
+      "type": "boolean",
+      "label": "Enable AI agents?",
+      "env_variable": "AGENTS_ENABLED",
+      "hint": "Self-hosted LLM chat over your finance data. Add a provider connection under Settings after enabling."
+    }
+  ]
+}

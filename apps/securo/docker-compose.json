@@ -1,0 +1,613 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "frontend",
+      "image": "ghcr.io/securo-finance/securo-frontend:0.15.1",
+      "isMain": true,
+      "internalPort": 8080,
+      "environment": [
+        {
+          "key": "BACKEND_URL",
+          "value": "http://backend:8000"
+        }
+      ],
+      "dependsOn": [
+        "backend"
+      ]
+    },
+    {
+      "name": "backend",
+      "image": "ghcr.io/securo-finance/securo-backend:0.15.1",
+      "command": "sh -c \"alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000\"",
+      "environment": [
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql+asyncpg://securo:${DB_PASSWORD}@db:5432/securo"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://redis:6379/0"
+        },
+        {
+          "key": "SECRET_KEY",
+          "value": "${SECRET_KEY}"
+        },
+        {
+          "key": "DEBUG",
+          "value": "false"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "STORAGE_LOCAL_PATH",
+          "value": "/app/data/attachments"
+        },
+        {
+          "key": "AGENTS_KNOWLEDGE_STORAGE_PATH",
+          "value": "/app/data/agent_knowledge"
+        },
+        {
+          "key": "TRUSTED_PROXY_HOPS",
+          "value": "${TRUSTED_PROXY_HOPS:-1}"
+        },
+        {
+          "key": "REGISTRATION_ENABLED",
+          "value": "${REGISTRATION_ENABLED:-false}"
+        },
+        {
+          "key": "LOCAL_AUTH_ENABLED",
+          "value": "true"
+        },
+        {
+          "key": "OPENEXCHANGERATES_APP_ID",
+          "value": "${OPENEXCHANGERATES_APP_ID:-}"
+        },
+        {
+          "key": "FX_SYNC_MODE",
+          "value": "on_demand"
+        },
+        {
+          "key": "TESOURO_DIRETO_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "SIMPLEFIN_ENABLED",
+          "value": "${SIMPLEFIN_ENABLED:-false}"
+        },
+        {
+          "key": "SIMPLEFIN_API_URL",
+          "value": "https://beta-bridge.simplefin.org"
+        },
+        {
+          "key": "ENABLE_BANKING_APP_ID",
+          "value": "${ENABLE_BANKING_APP_ID:-}"
+        },
+        {
+          "key": "ENABLE_BANKING_PRIVATE_KEY_FILE",
+          "value": "/app/secrets/enable_banking_private.pem"
+        },
+        {
+          "key": "ENABLE_BANKING_API_URL",
+          "value": "https://api.enablebanking.com"
+        },
+        {
+          "key": "AGENTS_ENABLED",
+          "value": "${AGENTS_ENABLED:-false}"
+        },
+        {
+          "key": "AGENTS_BUILTIN_MCP_URL",
+          "value": "http://mcp-server:8765/mcp"
+        },
+        {
+          "key": "AGENTS_MCP_JWT_SECRET",
+          "value": "${MCP_JWT_SECRET}"
+        },
+        {
+          "key": "AGENTS_EMBEDDING_PROVIDER",
+          "value": "native"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/attachments",
+          "containerPath": "/app/data/attachments",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/agent_knowledge",
+          "containerPath": "/app/data/agent_knowledge",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/embedding_models",
+          "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/secrets",
+          "containerPath": "/app/secrets",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "extraHosts": [
+        "host.docker.internal:host-gateway"
+      ],
+      "dependsOn": {
+        "db": {
+          "condition": "service_healthy"
+        },
+        "redis": {
+          "condition": "service_healthy"
+        }
+      },
+      "internalPort": 8000
+    },
+    {
+      "name": "celery-worker",
+      "image": "ghcr.io/securo-finance/securo-backend:0.15.1",
+      "command": "celery -A app.worker worker --loglevel=info --concurrency=2",
+      "environment": [
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql+asyncpg://securo:${DB_PASSWORD}@db:5432/securo"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://redis:6379/0"
+        },
+        {
+          "key": "SECRET_KEY",
+          "value": "${SECRET_KEY}"
+        },
+        {
+          "key": "DEBUG",
+          "value": "false"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "STORAGE_LOCAL_PATH",
+          "value": "/app/data/attachments"
+        },
+        {
+          "key": "AGENTS_KNOWLEDGE_STORAGE_PATH",
+          "value": "/app/data/agent_knowledge"
+        },
+        {
+          "key": "TRUSTED_PROXY_HOPS",
+          "value": "${TRUSTED_PROXY_HOPS:-1}"
+        },
+        {
+          "key": "REGISTRATION_ENABLED",
+          "value": "${REGISTRATION_ENABLED:-false}"
+        },
+        {
+          "key": "LOCAL_AUTH_ENABLED",
+          "value": "true"
+        },
+        {
+          "key": "OPENEXCHANGERATES_APP_ID",
+          "value": "${OPENEXCHANGERATES_APP_ID:-}"
+        },
+        {
+          "key": "FX_SYNC_MODE",
+          "value": "on_demand"
+        },
+        {
+          "key": "TESOURO_DIRETO_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "SIMPLEFIN_ENABLED",
+          "value": "${SIMPLEFIN_ENABLED:-false}"
+        },
+        {
+          "key": "SIMPLEFIN_API_URL",
+          "value": "https://beta-bridge.simplefin.org"
+        },
+        {
+          "key": "ENABLE_BANKING_APP_ID",
+          "value": "${ENABLE_BANKING_APP_ID:-}"
+        },
+        {
+          "key": "ENABLE_BANKING_PRIVATE_KEY_FILE",
+          "value": "/app/secrets/enable_banking_private.pem"
+        },
+        {
+          "key": "ENABLE_BANKING_API_URL",
+          "value": "https://api.enablebanking.com"
+        },
+        {
+          "key": "AGENTS_ENABLED",
+          "value": "${AGENTS_ENABLED:-false}"
+        },
+        {
+          "key": "AGENTS_BUILTIN_MCP_URL",
+          "value": "http://mcp-server:8765/mcp"
+        },
+        {
+          "key": "AGENTS_MCP_JWT_SECRET",
+          "value": "${MCP_JWT_SECRET}"
+        },
+        {
+          "key": "AGENTS_EMBEDDING_PROVIDER",
+          "value": "native"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/attachments",
+          "containerPath": "/app/data/attachments",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/agent_knowledge",
+          "containerPath": "/app/data/agent_knowledge",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/embedding_models",
+          "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/secrets",
+          "containerPath": "/app/secrets",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "extraHosts": [
+        "host.docker.internal:host-gateway"
+      ],
+      "dependsOn": {
+        "db": {
+          "condition": "service_healthy"
+        },
+        "redis": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "celery-beat",
+      "image": "ghcr.io/securo-finance/securo-backend:0.15.1",
+      "command": "celery -A app.worker beat --loglevel=info",
+      "environment": [
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql+asyncpg://securo:${DB_PASSWORD}@db:5432/securo"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://redis:6379/0"
+        },
+        {
+          "key": "SECRET_KEY",
+          "value": "${SECRET_KEY}"
+        },
+        {
+          "key": "DEBUG",
+          "value": "false"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "STORAGE_LOCAL_PATH",
+          "value": "/app/data/attachments"
+        },
+        {
+          "key": "AGENTS_KNOWLEDGE_STORAGE_PATH",
+          "value": "/app/data/agent_knowledge"
+        },
+        {
+          "key": "TRUSTED_PROXY_HOPS",
+          "value": "${TRUSTED_PROXY_HOPS:-1}"
+        },
+        {
+          "key": "REGISTRATION_ENABLED",
+          "value": "${REGISTRATION_ENABLED:-false}"
+        },
+        {
+          "key": "LOCAL_AUTH_ENABLED",
+          "value": "true"
+        },
+        {
+          "key": "OPENEXCHANGERATES_APP_ID",
+          "value": "${OPENEXCHANGERATES_APP_ID:-}"
+        },
+        {
+          "key": "FX_SYNC_MODE",
+          "value": "on_demand"
+        },
+        {
+          "key": "TESOURO_DIRETO_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "SIMPLEFIN_ENABLED",
+          "value": "${SIMPLEFIN_ENABLED:-false}"
+        },
+        {
+          "key": "SIMPLEFIN_API_URL",
+          "value": "https://beta-bridge.simplefin.org"
+        },
+        {
+          "key": "ENABLE_BANKING_APP_ID",
+          "value": "${ENABLE_BANKING_APP_ID:-}"
+        },
+        {
+          "key": "ENABLE_BANKING_PRIVATE_KEY_FILE",
+          "value": "/app/secrets/enable_banking_private.pem"
+        },
+        {
+          "key": "ENABLE_BANKING_API_URL",
+          "value": "https://api.enablebanking.com"
+        },
+        {
+          "key": "AGENTS_ENABLED",
+          "value": "${AGENTS_ENABLED:-false}"
+        },
+        {
+          "key": "AGENTS_BUILTIN_MCP_URL",
+          "value": "http://mcp-server:8765/mcp"
+        },
+        {
+          "key": "AGENTS_MCP_JWT_SECRET",
+          "value": "${MCP_JWT_SECRET}"
+        },
+        {
+          "key": "AGENTS_EMBEDDING_PROVIDER",
+          "value": "native"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/attachments",
+          "containerPath": "/app/data/attachments",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/agent_knowledge",
+          "containerPath": "/app/data/agent_knowledge",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/embedding_models",
+          "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/secrets",
+          "containerPath": "/app/secrets",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "extraHosts": [
+        "host.docker.internal:host-gateway"
+      ],
+      "dependsOn": {
+        "db": {
+          "condition": "service_healthy"
+        },
+        "redis": {
+          "condition": "service_healthy"
+        }
+      }
+    },
+    {
+      "name": "mcp-server",
+      "image": "ghcr.io/securo-finance/securo-backend:0.15.1",
+      "command": "uvicorn mcp_server.main:app --host 0.0.0.0 --port 8765",
+      "environment": [
+        {
+          "key": "DATABASE_URL",
+          "value": "postgresql+asyncpg://securo:${DB_PASSWORD}@db:5432/securo"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://redis:6379/0"
+        },
+        {
+          "key": "SECRET_KEY",
+          "value": "${SECRET_KEY}"
+        },
+        {
+          "key": "DEBUG",
+          "value": "false"
+        },
+        {
+          "key": "FRONTEND_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "STORAGE_LOCAL_PATH",
+          "value": "/app/data/attachments"
+        },
+        {
+          "key": "AGENTS_KNOWLEDGE_STORAGE_PATH",
+          "value": "/app/data/agent_knowledge"
+        },
+        {
+          "key": "TRUSTED_PROXY_HOPS",
+          "value": "${TRUSTED_PROXY_HOPS:-1}"
+        },
+        {
+          "key": "REGISTRATION_ENABLED",
+          "value": "${REGISTRATION_ENABLED:-false}"
+        },
+        {
+          "key": "LOCAL_AUTH_ENABLED",
+          "value": "true"
+        },
+        {
+          "key": "OPENEXCHANGERATES_APP_ID",
+          "value": "${OPENEXCHANGERATES_APP_ID:-}"
+        },
+        {
+          "key": "FX_SYNC_MODE",
+          "value": "on_demand"
+        },
+        {
+          "key": "TESOURO_DIRETO_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "SIMPLEFIN_ENABLED",
+          "value": "${SIMPLEFIN_ENABLED:-false}"
+        },
+        {
+          "key": "SIMPLEFIN_API_URL",
+          "value": "https://beta-bridge.simplefin.org"
+        },
+        {
+          "key": "ENABLE_BANKING_APP_ID",
+          "value": "${ENABLE_BANKING_APP_ID:-}"
+        },
+        {
+          "key": "ENABLE_BANKING_PRIVATE_KEY_FILE",
+          "value": "/app/secrets/enable_banking_private.pem"
+        },
+        {
+          "key": "ENABLE_BANKING_API_URL",
+          "value": "https://api.enablebanking.com"
+        },
+        {
+          "key": "AGENTS_ENABLED",
+          "value": "${AGENTS_ENABLED:-false}"
+        },
+        {
+          "key": "AGENTS_BUILTIN_MCP_URL",
+          "value": "http://mcp-server:8765/mcp"
+        },
+        {
+          "key": "AGENTS_MCP_JWT_SECRET",
+          "value": "${MCP_JWT_SECRET}"
+        },
+        {
+          "key": "AGENTS_EMBEDDING_PROVIDER",
+          "value": "native"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/attachments",
+          "containerPath": "/app/data/attachments",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/agent_knowledge",
+          "containerPath": "/app/data/agent_knowledge",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/embedding_models",
+          "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/secrets",
+          "containerPath": "/app/secrets",
+          "readOnly": true,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "extraHosts": [
+        "host.docker.internal:host-gateway"
+      ],
+      "dependsOn": {
+        "db": {
+          "condition": "service_healthy"
+        },
+        "redis": {
+          "condition": "service_healthy"
+        }
+      },
+      "internalPort": 8765
+    },
+    {
+      "name": "db",
+      "image": "pgvector/pgvector:pg16",
+      "internalPort": 5432,
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "securo"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "securo"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U securo -d securo || exit 1",
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "30s"
+      }
+    },
+    {
+      "name": "redis",
+      "image": "redis:8-alpine",
+      "internalPort": 6379,
+      "healthCheck": {
+        "test": "redis-cli ping || exit 1",
+        "interval": "10s",
+        "timeout": "5s",
+        "retries": 10,
+        "startPeriod": "10s"
+      }
+    }
+  ]
+}

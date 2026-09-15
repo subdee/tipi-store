@@ -41,7 +41,7 @@
         "docker"
       ],
       "matchPackageNames": [
-        "/(^|/)(mariadb|mysql|mongodb|postgres|postgis|redis|meilisearch)$/"
+        "/(^|/)(mariadb|mysql|mongodb|postgres|postgis|pgvector|redis|meilisearch)$/"
       ],
       "enabled": false
     }
