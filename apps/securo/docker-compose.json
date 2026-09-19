@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/securo-finance/securo-frontend:0.15.1",
+      "image": "ghcr.io/securo-finance/securo-frontend:0.16.0",
       "isMain": true,
       "internalPort": 8080,
       "environment": [
