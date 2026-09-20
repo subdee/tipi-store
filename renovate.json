@@ -44,6 +44,52 @@
         "/(^|/)(mariadb|mysql|mongodb|postgres|postgis|pgvector|redis|meilisearch)$/"
       ],
       "enabled": false
+    },
+    {
+      "description": "Apps whose services are published as several images from one upstream release. Renovate would otherwise open a PR per image, and until every one is merged the store ships a mismatched pair (and config.json advertises a version no single image is on). Grouping keeps each app's images in one PR so they move together. Matched on a trailing path segment, like the backing-services rule above.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|/)adventurelog-(frontend|backend)$/"
+      ],
+      "groupName": "AdventureLog"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|/)aeterna-(frontend|backend)$/"
+      ],
+      "groupName": "Aeterna"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|/)opengym/(web|api)$/"
+      ],
+      "groupName": "openGym"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|/)securo-(frontend|backend)$/"
+      ],
+      "groupName": "Securo"
+    },
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchPackageNames": [
+        "/(^|/)wanderer-(web|db)$/"
+      ],
+      "groupName": "Wanderer"
     }
   ],
   "postUpgradeTasks": {
