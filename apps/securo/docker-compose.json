@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/securo-finance/securo-frontend:0.16.0",
+      "image": "ghcr.io/securo-finance/securo-frontend:0.16.2",
       "isMain": true,
       "internalPort": 8080,
       "environment": [
@@ -18,7 +18,7 @@
     },
     {
       "name": "backend",
-      "image": "ghcr.io/securo-finance/securo-backend:0.16.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.2",
       "command": "sh -c \"alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000\"",
       "environment": [
         {
@@ -155,7 +155,7 @@
     },
     {
       "name": "celery-worker",
-      "image": "ghcr.io/securo-finance/securo-backend:0.16.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.2",
       "command": "celery -A app.worker worker --loglevel=info --concurrency=2",
       "environment": [
         {
@@ -291,7 +291,7 @@
     },
     {
       "name": "celery-beat",
-      "image": "ghcr.io/securo-finance/securo-backend:0.16.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.2",
       "command": "celery -A app.worker beat --loglevel=info",
       "environment": [
         {
@@ -427,7 +427,7 @@
     },
     {
       "name": "mcp-server",
-      "image": "ghcr.io/securo-finance/securo-backend:0.16.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.16.2",
       "command": "uvicorn mcp_server.main:app --host 0.0.0.0 --port 8765",
       "environment": [
         {
