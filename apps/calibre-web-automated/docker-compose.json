@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "calibre-web-automated",
-      "image": "crocodilestick/calibre-web-automated:v4.0.6",
+      "image": "crocodilestick/calibre-web-automated:v4.0.8",
       "isMain": true,
       "environment": [
         {
