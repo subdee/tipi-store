@@ -11,17 +11,16 @@
     "ai"
   ],
   "description": "SUB/WAVE is a personal internet radio station, not a playlist. One Icecast stream carries a single broadcast and every listener hears the same thing at the same moment, with no per-listener shuffle and no skip button. An AI DJ picks the tracks from your own Navidrome (or any Subsonic) library and talks between them: station idents, time checks, the weather, the news, an intro for whatever is going out next. Listeners can ask for music in plain language and the DJ works out what they meant. The LLM provider is swappable from the admin console (Ollama, Anthropic, OpenAI, Google, OpenRouter or any OpenAI-compatible server), speech is rendered locally with the bundled Piper and Kokoro voices, and the acoustic analyzer measures BPM, key, loudness and how each track ends so crossfades fit the material. Schedule shows across a 24x7 grid, give each slot its own DJ persona, build playlists from a plain-language description, and tune in from the web player, a PWA, VLC, Sonos or a hardware radio.",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "1.16.0",
   "source": "https://github.com/perminder-klair/subwave",
   "website": "https://www.getsubwave.com",
   "exposable": true,
   "supported_architectures": [
-    "arm64",
     "amd64"
   ],
   "created_at": 1791072000000,
-  "updated_at": 1791072000000,
+  "updated_at": 1791115200000,
   "dynamic_config": true,
   "form_fields": [
     {

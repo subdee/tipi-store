@@ -2,49 +2,23 @@
   "schemaVersion": 2,
   "services": [
     {
-      "name": "caddy",
-      "image": "ghcr.io/perminder-klair/subwave-caddy:1.16.0",
+      "name": "subwave",
+      "image": "ghcr.io/perminder-klair/subwave-aio:1.16.0",
       "isMain": true,
       "internalPort": 80,
       "environment": [
         {
-          "key": "TZ",
-          "value": "${TZ}"
-        }
-      ],
-      "volumes": [
-        {
-          "hostPath": "${APP_DATA_DIR}/data/caddy/data",
-          "containerPath": "/data",
-          "readOnly": false,
-          "shared": false,
-          "private": false
+          "key": "ADMIN_USER",
+          "value": "${SUBWAVE_ADMIN_USER}"
         },
         {
-          "hostPath": "${APP_DATA_DIR}/data/caddy/config",
-          "containerPath": "/config",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        }
-      ],
-      "dependsOn": {
-        "web": {
-          "condition": "service_started"
+          "key": "ADMIN_PASS",
+          "value": "${SUBWAVE_ADMIN_PASS}"
         },
-        "controller": {
-          "condition": "service_healthy"
+        {
+          "key": "SITE_URL",
+          "value": "${SUBWAVE_SITE_URL:-}"
         },
-        "broadcast": {
-          "condition": "service_healthy"
-        }
-      }
-    },
-    {
-      "name": "broadcast",
-      "image": "ghcr.io/perminder-klair/subwave-broadcast:1.16.0",
-      "internalPort": 7702,
-      "environment": [
         {
           "key": "ICECAST_MAX_CLIENTS",
           "value": "${SUBWAVE_MAX_CLIENTS:-}"
@@ -64,145 +38,8 @@
           "readOnly": false,
           "shared": false,
           "private": false
-        },
-        {
-          "hostPath": "${APP_DATA_DIR}/data/state/logs",
-          "containerPath": "/var/log/liquidsoap",
-          "readOnly": false,
-          "shared": false,
-          "private": false
         }
-      ],
-      "healthCheck": {
-        "test": "curl -fsS http://localhost:7702/status-json.xsl > /dev/null || exit 1",
-        "interval": "10s",
-        "timeout": "5s",
-        "retries": 12,
-        "startPeriod": "30s"
-      }
-    },
-    {
-      "name": "controller",
-      "image": "ghcr.io/perminder-klair/subwave-controller:1.16.0",
-      "internalPort": 7701,
-      "environment": [
-        {
-          "key": "NODE_ENV",
-          "value": "production"
-        },
-        {
-          "key": "STATE_DIR",
-          "value": "/var/sub-wave"
-        },
-        {
-          "key": "SOUNDS_DIR",
-          "value": "/sounds"
-        },
-        {
-          "key": "ADMIN_USER",
-          "value": "${SUBWAVE_ADMIN_USER}"
-        },
-        {
-          "key": "ADMIN_PASS",
-          "value": "${SUBWAVE_ADMIN_PASS}"
-        },
-        {
-          "key": "SITE_URL",
-          "value": "${SUBWAVE_SITE_URL:-}"
-        },
-        {
-          "key": "ANALYZE_URL",
-          "value": "http://analyzer:8080"
-        },
-        {
-          "key": "TZ",
-          "value": "${TZ}"
-        }
-      ],
-      "extraHosts": [
-        "host.docker.internal:host-gateway"
-      ],
-      "volumes": [
-        {
-          "hostPath": "${APP_DATA_DIR}/data/state",
-          "containerPath": "/var/sub-wave",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        }
-      ],
-      "healthCheck": {
-        "test": "curl -fsS http://localhost:7701/health > /dev/null || exit 1",
-        "interval": "10s",
-        "timeout": "5s",
-        "retries": 6,
-        "startPeriod": "30s"
-      },
-      "dependsOn": {
-        "broadcast": {
-          "condition": "service_healthy"
-        }
-      }
-    },
-    {
-      "name": "web",
-      "image": "ghcr.io/perminder-klair/subwave-web:1.16.0",
-      "internalPort": 7700,
-      "environment": [
-        {
-          "key": "NODE_ENV",
-          "value": "production"
-        },
-        {
-          "key": "SITE_URL",
-          "value": "${SUBWAVE_SITE_URL:-}"
-        },
-        {
-          "key": "CONTROLLER_INTERNAL_URL",
-          "value": "http://controller:7701"
-        },
-        {
-          "key": "TZ",
-          "value": "${TZ}"
-        }
-      ],
-      "dependsOn": {
-        "controller": {
-          "condition": "service_healthy"
-        }
-      }
-    },
-    {
-      "name": "analyzer",
-      "image": "ghcr.io/perminder-klair/subwave-analyzer:1.16.0",
-      "internalPort": 8080,
-      "environment": [
-        {
-          "key": "TZ",
-          "value": "${TZ}"
-        }
-      ],
-      "deploy": {
-        "resources": {
-          "limits": {
-            "memory": "6g"
-          }
-        }
-      },
-      "volumes": [
-        {
-          "hostPath": "${APP_DATA_DIR}/data/state",
-          "containerPath": "/var/sub-wave",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        }
-      ],
-      "dependsOn": {
-        "broadcast": {
-          "condition": "service_healthy"
-        }
-      }
+      ]
     }
   ]
 }

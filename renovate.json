@@ -87,15 +87,6 @@
         "docker"
       ],
       "matchPackageNames": [
-        "/(^|/)subwave-(caddy|broadcast|controller|web|analyzer)$/"
-      ],
-      "groupName": "SUB/WAVE"
-    },
-    {
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
         "/(^|/)wanderer-(web|db)$/"
       ],
       "groupName": "Wanderer"

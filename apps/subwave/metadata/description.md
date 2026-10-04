@@ -32,10 +32,11 @@ Open the app and go to **`/onboarding`**. Sign in with the admin username and pa
 - **Public URL** — optional, and only used where the station has to print an absolute address: share cards, the sitemap, and the `/listen.pls` / `/listen.m3u` tune-in files. Without it those fall back to whatever address the listener arrived on, which is usually fine on a LAN. Set it (and restart) once you expose the app on a domain.
 - **Reaching Navidrome** — the containers get `host.docker.internal`, so a Navidrome on the same host is reachable as `http://host.docker.internal:4533`; a Navidrome elsewhere just takes its LAN address. Navidrome ≥ 0.62 is recommended — SUB/WAVE streams with `format=raw` so transcode limits never throttle the radio, and it will fold Navidrome's `sonicSimilarity` neighbours into track selection when the extension is on.
 - **No LLM to hand?** Install Ollama and point the station at a local model, or use any cloud provider's API key. The music keeps playing without a working LLM; only the chatter stops.
-- **Voices** — Piper and Kokoro ship inside the controller and cover most stations. The heavyweight Chatterbox (voice cloning) and PocketTTS engines live in an optional ~6 GB PyTorch sidecar that is **not** part of this app; personas set to them fall back to Piper. The cloud engines and the Remote engine (your own HTTP endpoint) work without it.
-- **Acoustic analysis** — the lean `analyzer` service is included and handles BPM, key, loudness and endings. The heavier "sounds-like" (CLAP) embeddings and Demucs vocal ranges need the amd64-only heavy analyzer image and are not enabled here.
-- **System stats panel** — upstream feeds the admin Stats panel through a Docker socket proxy. That is left out on purpose, so this one panel stays empty; everything else in the admin console works.
-- **Exposing it** — the web UI, the API and the audio stream all come out of the one bundled Caddy edge on a single port, so a single Runtipi exposure covers the whole station.
+- **Voices** — Piper and Kokoro run inside the image and cover most stations. The heavyweight Chatterbox (voice cloning) and PocketTTS engines live in an optional ~6 GB PyTorch sidecar that is **not** part of this build; personas set to them fall back to Piper. The cloud engines and the Remote engine (your own HTTP endpoint) work without it.
+- **Acoustic analysis** — runs in-process and handles BPM, key, loudness and endings. The heavier "sounds-like" (CLAP) embeddings and Demucs vocal ranges need upstream's separate heavy image and are not enabled here.
+- **System stats panel** — upstream can feed the admin Stats panel through a Docker socket proxy. This build leaves it out, so that one panel stays empty; everything else in the admin console works.
+- **Exposing it** — the web UI, the API and the audio stream all come out of one internal Caddy edge on a single port, so a single Runtipi exposure covers the whole station.
+- **amd64 only** — this is upstream's all-in-one build, which is published for amd64 alone. There is no arm64 image, so it will not run on a Pi or an Apple-Silicon host.
 
 ## Music licensing
 
@@ -44,7 +45,5 @@ SUB/WAVE is playback and automation software and ships with no licensed content.
 ## Data layout
 
 - `${APP_DATA_DIR}/data/state` — everything that matters: settings, the DJ personas, shows, skills, playlists, the library cache (SQLite), rendered voices, jingles and the hourly archives. **Back this directory up and you have backed up the station.**
-- `${APP_DATA_DIR}/data/state/logs` — Liquidsoap's logs
-- `${APP_DATA_DIR}/data/caddy` — the bundled edge's data and config
 
-Source: <https://github.com/perminder-klair/subwave> · Docker images: `ghcr.io/perminder-klair/subwave-caddy`, `subwave-broadcast`, `subwave-controller`, `subwave-web`, `subwave-analyzer`
+Source: <https://github.com/perminder-klair/subwave> · Docker image: `ghcr.io/perminder-klair/subwave-aio` — icecast2, Liquidsoap, the DJ controller, the web UI and the Caddy edge in one container, the same build upstream ships for one-container platforms
