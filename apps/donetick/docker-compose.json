@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "donetick",
-      "image": "donetick/donetick:v0.1.79",
+      "image": "donetick/donetick:v0.1.80",
       "isMain": true,
       "internalPort": 2021,
       "environment": [
