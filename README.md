@@ -13,6 +13,7 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 - [openGym](https://gitlab.com/DuarteSantos8/opengym) - Self-hosted gym and body-weight tracker
 - [Papra](https://github.com/papra-hq/papra) - Minimalistic document archiving platform
 - [Securo](https://github.com/securo-finance/securo) - Open-source personal finance manager, self-hosted and privacy-first
+- [SUB/WAVE](https://github.com/perminder-klair/subwave) - Personal internet radio station with an AI DJ
 - [TREK](https://github.com/liketrek/TREK) - Self-hosted travel and trip planner
 - [Wanderer](https://wanderer.to/) - Trail database
 - [Wishlist](https://github.com/cmintey/wishlist) - A sharable wishlist for friends and family

@@ -1,0 +1,59 @@
+{
+  "name": "SUB/WAVE",
+  "id": "subwave",
+  "available": true,
+  "short_desc": "Personal internet radio station with an AI DJ",
+  "author": "perminder-klair",
+  "port": 7700,
+  "categories": [
+    "music",
+    "media",
+    "ai"
+  ],
+  "description": "SUB/WAVE is a personal internet radio station, not a playlist. One Icecast stream carries a single broadcast and every listener hears the same thing at the same moment, with no per-listener shuffle and no skip button. An AI DJ picks the tracks from your own Navidrome (or any Subsonic) library and talks between them: station idents, time checks, the weather, the news, an intro for whatever is going out next. Listeners can ask for music in plain language and the DJ works out what they meant. The LLM provider is swappable from the admin console (Ollama, Anthropic, OpenAI, Google, OpenRouter or any OpenAI-compatible server), speech is rendered locally with the bundled Piper and Kokoro voices, and the acoustic analyzer measures BPM, key, loudness and how each track ends so crossfades fit the material. Schedule shows across a 24x7 grid, give each slot its own DJ persona, build playlists from a plain-language description, and tune in from the web player, a PWA, VLC, Sonos or a hardware radio.",
+  "tipi_version": 1,
+  "version": "1.16.0",
+  "source": "https://github.com/perminder-klair/subwave",
+  "website": "https://www.getsubwave.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1791072000000,
+  "updated_at": 1791072000000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "text",
+      "label": "Admin username",
+      "hint": "Signs in to the /onboarding wizard and the admin console. The station refuses to start without an admin user and password.",
+      "env_variable": "SUBWAVE_ADMIN_USER",
+      "default": "admin",
+      "required": true
+    },
+    {
+      "type": "password",
+      "label": "Admin password",
+      "hint": "Password for the admin console. Changing it later takes effect on the next restart.",
+      "env_variable": "SUBWAVE_ADMIN_PASS",
+      "min": 8,
+      "required": true
+    },
+    {
+      "type": "url",
+      "label": "Public URL",
+      "hint": "Optional. Full URL you reach the station on, without a trailing slash (e.g. https://radio.example.com or http://192.168.1.10:7700). Used for share cards, the sitemap and the /listen.pls and /listen.m3u tune-in files; without it those fall back to the address the listener came in on.",
+      "placeholder": "https://radio.example.com",
+      "env_variable": "SUBWAVE_SITE_URL",
+      "required": false
+    },
+    {
+      "type": "number",
+      "label": "Maximum concurrent listeners",
+      "hint": "Icecast client ceiling. Leave empty for the default of 100.",
+      "env_variable": "SUBWAVE_MAX_CLIENTS",
+      "required": false
+    }
+  ]
+}
