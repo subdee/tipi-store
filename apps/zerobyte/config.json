@@ -9,7 +9,7 @@
     "utilities"
   ],
   "description": "Zerobyte is a backup automation tool that helps you save your data across multiple storage backends. Built on top of Restic, it provides an modern web interface to schedule, manage, and monitor encrypted backups of your remote storage.",
-  "tipi_version": 8,
+  "tipi_version": 9,
   "version": "v0.43.2",
   "source": "https://github.com/nicotsx/zerobyte",
   "exposable": true,
@@ -18,13 +18,20 @@
     "amd64"
   ],
   "created_at": 1753187483000,
-  "updated_at": 1791189442064,
+  "updated_at": 1791368493602,
   "dynamic_config": true,
   "form_fields": [
     {
       "type": "text",
       "label": "Timezone",
       "env_variable": "TIMEZONE"
+    },
+    {
+      "type": "text",
+      "label": "Allowed webhook origins",
+      "hint": "Optional. Comma-separated origins (scheme, host and port, e.g. https://gotify.example.com) that Zerobyte may call for Gotify, generic webhooks, self-hosted ntfy and backup pre/post webhooks. Public services such as Slack, Discord or ntfy.sh do not need it.",
+      "env_variable": "ZEROBYTE_WEBHOOK_ALLOWED_ORIGINS",
+      "required": false
     }
   ]
 }

@@ -26,3 +26,12 @@ Restic, it provides an modern web interface to schedule, manage, and monitor enc
 - &nbsp; **Flexible scheduling** For automated backup jobs with fine-grained retention policies
 - &nbsp; **End-to-end encryption** ensuring your data is always protected
 - &nbsp; **Multi-protocol support**: Backup from NFS, SMB, WebDAV, SFTP, or local directories
+
+## Configuration notes
+
+- **Allowed webhook origins** — Zerobyte only calls HTTP endpoints whose origin is on this list. Gotify, generic webhooks, self-hosted ntfy servers and backup pre/post webhooks all need their origin here (scheme, host and port, for example `https://gotify.example.com`). Slack, Discord, Pushover, Telegram and the public ntfy.sh do not. Leave empty if you use none of these.
+- **What Zerobyte can see** — the whole Runtipi folder is mounted read-write at `/runtipi` inside the container, so `/runtipi/app-data`, `/runtipi/media` and `/runtipi/backups` can be added as directory volumes. Anything outside it (other disks, an rclone config, an SSH key for SFTP repositories) needs an extra mount through a user-config override.
+
+## Data layout
+
+- `${APP_DATA_DIR}/var/lib/zerobyte/data` — the configuration database and `restic.pass`, the encryption password for every repository. **Without `restic.pass` no backup can be read back; keep a copy of it somewhere else.**

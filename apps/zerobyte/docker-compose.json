@@ -9,6 +9,10 @@
         {
           "key": "TZ",
           "value": "${TIMEZONE}"
+        },
+        {
+          "key": "WEBHOOK_ALLOWED_ORIGINS",
+          "value": "${ZEROBYTE_WEBHOOK_ALLOWED_ORIGINS:-}"
         }
       ],
       "internalPort": 4096,
