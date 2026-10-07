@@ -1,0 +1,26 @@
+{
+  "name": "Databasus",
+  "id": "databasus",
+  "available": true,
+  "short_desc": "Scheduled, encrypted backups for PostgreSQL, MySQL, MariaDB and MongoDB",
+  "author": "databasus",
+  "port": 4005,
+  "categories": [
+    "utilities",
+    "data"
+  ],
+  "description": "Databasus is a self-hosted database backup tool. Point it at your PostgreSQL, MySQL, MariaDB or MongoDB instances and it takes scheduled logical dumps (plus physical, point-in-time backups for PostgreSQL), encrypts them, and ships them to local disk, S3, Cloudflare R2, Google Drive, Dropbox, SFTP, NAS or any rclone remote. Retention by age, count or GFS, restore from the web interface, health checks on each database, backup verification, and notifications through email, Telegram, Slack, Discord, Mattermost or webhooks. The first account created becomes the administrator.",
+  "tipi_version": 1,
+  "version": "v3.60.0",
+  "source": "https://github.com/databasus/databasus",
+  "website": "https://databasus.com",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1791368493602,
+  "updated_at": 1791368493602,
+  "dynamic_config": true,
+  "form_fields": []
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "databasus",
+      "image": "databasus/databasus:v3.60.0",
+      "isMain": true,
+      "internalPort": 4005,
+      "environment": [
+        {
+          "key": "TZ",
+          "value": "${TZ}"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data",
+          "containerPath": "/databasus-data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "databasus healthcheck || exit 1",
+        "interval": "30s",
+        "timeout": "5s",
+        "retries": 3,
+        "startPeriod": "1m"
+      }
+    }
+  ]
+}
