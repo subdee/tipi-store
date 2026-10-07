@@ -11,6 +11,14 @@
           "value": "${TIMEZONE}"
         },
         {
+          "key": "APP_SECRET",
+          "value": "${ZEROBYTE_APP_SECRET}"
+        },
+        {
+          "key": "BASE_URL",
+          "value": "${APP_PROTOCOL}://${APP_DOMAIN}"
+        },
+        {
           "key": "WEBHOOK_ALLOWED_ORIGINS",
           "value": "${ZEROBYTE_WEBHOOK_ALLOWED_ORIGINS:-}"
         }
