@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/endurain-project/endurain:v0.17.7",
+      "image": "ghcr.io/endurain-project/endurain:v0.19.3",
       "isMain": true,
       "environment": [
         {
