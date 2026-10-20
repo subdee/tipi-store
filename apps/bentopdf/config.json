@@ -10,8 +10,8 @@
     "data"
   ],
   "description": "BentoPDF is a self-hosted PDF toolkit with over 100 tools: merge, split, organise, rotate and crop pages, annotate and redact, edit text, fill and create forms, sign documents, add watermarks, page numbers and bookmarks, convert to and from images, Office and e-book formats, OCR scanned documents, and encrypt, compress or sanitise files. Every operation runs in your browser with WebAssembly, so the documents you work on never leave your machine and the container only serves static files.",
-  "tipi_version": 1,
-  "version": "v2.8.8",
+  "tipi_version": 2,
+  "version": "2.8.10",
   "source": "https://github.com/alam00000/bentopdf",
   "website": "https://bentopdf.com",
   "exposable": true,
@@ -20,7 +20,7 @@
     "amd64"
   ],
   "created_at": 1788480000000,
-  "updated_at": 1788480000000,
+  "updated_at": 1792480727067,
   "dynamic_config": true,
   "form_fields": []
 }
