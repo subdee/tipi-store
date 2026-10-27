@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "databasus",
-      "image": "databasus/databasus:v3.61.0",
+      "image": "databasus/databasus:v3.64.0",
       "isMain": true,
       "internalPort": 4005,
       "environment": [

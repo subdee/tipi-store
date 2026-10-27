@@ -9,8 +9,8 @@
     "social"
   ],
   "description": "Wishlist is a self-hosted wishlist application that you can share with your friends and family.",
-  "tipi_version": 11,
-  "version": "v0.68.0",
+  "tipi_version": 12,
+  "version": "v0.69.0",
   "source": "https://github.com/cmintey/wishlist",
   "exposable": true,
   "supported_architectures": [
@@ -18,7 +18,7 @@
     "amd64"
   ],
   "created_at": 1758044483000,
-  "updated_at": 1791535131789,
+  "updated_at": 1793104261624,
   "dynamic_config": true,
   "form_fields": [
     {

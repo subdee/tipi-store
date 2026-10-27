@@ -3,8 +3,9 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/endurain-project/endurain:v0.19.3",
+      "image": "ghcr.io/endurain-project/endurain:v0.20.1",
       "isMain": true,
+      "user": "0:0",
       "environment": [
         {
           "key": "DB_PASSWORD",
@@ -54,29 +55,8 @@
       "internalPort": 8080,
       "volumes": [
         {
-          "hostPath": "${APP_DATA_DIR}/data/data/activity_files",
-          "containerPath": "/app/backend/data/activity_files",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        },
-        {
-          "hostPath": "${APP_DATA_DIR}/data/data/activity_media",
-          "containerPath": "/app/backend/data/activity_media",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        },
-        {
-          "hostPath": "${APP_DATA_DIR}/data/data/server_images",
-          "containerPath": "/app/backend/data/server_images",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        },
-        {
-          "hostPath": "${APP_DATA_DIR}/data/data/user_images",
-          "containerPath": "/app/backend/data/user_images",
+          "hostPath": "${APP_DATA_DIR}/data/data",
+          "containerPath": "/app/backend/data",
           "readOnly": false,
           "shared": false,
           "private": false

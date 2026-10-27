@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "subwave",
-      "image": "ghcr.io/perminder-klair/subwave-aio:1.24.0",
+      "image": "ghcr.io/perminder-klair/subwave-aio:1.28.0",
       "isMain": true,
       "internalPort": 80,
       "environment": [

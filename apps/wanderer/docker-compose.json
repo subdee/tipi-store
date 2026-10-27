@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "web",
-      "image": "flomp/wanderer-web:v0.20.0",
+      "image": "flomp/wanderer-web:v0.21.2",
       "isMain": true,
       "environment": [
         {
@@ -13,6 +13,10 @@
         {
           "key": "MEILI_MASTER_KEY",
           "value": "${MEILI_MASTER_KEY}"
+        },
+        {
+          "key": "POCKETBASE_PROXY_SECRET",
+          "value": "${POCKETBASE_PROXY_SECRET}"
         },
         {
           "key": "ORIGIN",
@@ -99,7 +103,7 @@
     },
     {
       "name": "db",
-      "image": "flomp/wanderer-db:v0.20.0",
+      "image": "flomp/wanderer-db:v0.21.2",
       "environment": [
         {
           "key": "MEILI_URL",
@@ -108,6 +112,10 @@
         {
           "key": "MEILI_MASTER_KEY",
           "value": "${MEILI_MASTER_KEY}"
+        },
+        {
+          "key": "POCKETBASE_PROXY_SECRET",
+          "value": "${POCKETBASE_PROXY_SECRET}"
         },
         {
           "key": "POCKETBASE_ENCRYPTION_KEY",

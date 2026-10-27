@@ -9,8 +9,8 @@
     "social"
   ],
   "description": "wanderer is a self-hosted trail database. You can upload your recorded tracks or create new ones and add various metadata to build an easily searchable catalogue.",
-  "tipi_version": 12,
-  "version": "v0.20.0",
+  "tipi_version": 13,
+  "version": "v0.21.2",
   "source": "https://github.com/Flomp/wanderer",
   "exposable": true,
   "supported_architectures": [
@@ -18,7 +18,7 @@
     "amd64"
   ],
   "created_at": 1746457354000,
-  "updated_at": 1746457354000,
+  "updated_at": 1793104261624,
   "dynamic_config": true,
   "form_fields": [
     {
@@ -30,6 +30,14 @@
       "type": "text",
       "label": "PocketBase Encryption key",
       "env_variable": "POCKETBASE_ENCRYPTION_KEY"
+    },
+    {
+      "type": "random",
+      "label": "PocketBase proxy secret",
+      "hint": "Shared secret the web and db services authenticate inbound ActivityPub deliveries with. Required since v0.21.0.",
+      "env_variable": "POCKETBASE_PROXY_SECRET",
+      "min": 64,
+      "encoding": "hex"
     }
   ]
 }

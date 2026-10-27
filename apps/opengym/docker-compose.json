@@ -24,22 +24,6 @@
           "value": "${TZ}"
         }
       ],
-      "volumes": [
-        {
-          "hostPath": "${APP_DATA_DIR}/data/media/img",
-          "containerPath": "/usr/share/nginx/html/img",
-          "readOnly": true,
-          "shared": false,
-          "private": false
-        },
-        {
-          "hostPath": "${APP_DATA_DIR}/data/media/gif",
-          "containerPath": "/usr/share/nginx/html/gif",
-          "readOnly": true,
-          "shared": false,
-          "private": false
-        }
-      ],
       "dependsOn": {
         "api": {
           "condition": "service_started"
@@ -98,27 +82,6 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/app",
           "containerPath": "/data",
-          "readOnly": false,
-          "shared": false,
-          "private": false
-        }
-      ]
-    },
-    {
-      "name": "media",
-      "image": "alpine/git:2.54.0",
-      "restart": "unless-stopped",
-      "entrypoint": [
-        "/bin/sh",
-        "-c"
-      ],
-      "command": [
-        "set -e; if [ -f /out/.fetched ]; then echo 'Exercise media already present - skipping download.'; else echo 'Downloading exercise media (~140 MB, one time) from github.com/hasaneyldrm/exercises-dataset'; mkdir -p /out/img /out/gif; git clone --depth 1 https://github.com/hasaneyldrm/exercises-dataset /tmp/ds; cp /tmp/ds/images/*.jpg /out/img/; cp /tmp/ds/videos/*.gif /out/gif/; rm -rf /tmp/ds; touch /out/.fetched; echo 'Exercise media ready.'; fi; exec sleep infinity"
-      ],
-      "volumes": [
-        {
-          "hostPath": "${APP_DATA_DIR}/data/media",
-          "containerPath": "/out",
           "readOnly": false,
           "shared": false,
           "private": false
