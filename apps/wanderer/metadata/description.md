@@ -46,6 +46,21 @@ The first startup can take up to 90 seconds after which you can access the front
 
 You can also run wanderer on bare-metal. Check out the [documentation](https://wanderer.to/getting-started/installation/#from-source) for a detailed how-to guide.
 
+## Configuration notes
+
+- **PocketBase proxy secret** — shared between the `web` and `db` services to authenticate inbound ActivityPub deliveries. Required since v0.21.0; if it is missing or the two differ, every inbound federation delivery is rejected.
+- **Provider plugins** — Strava, Hammerhead and other integrations are WASM bundles that are not part of the image. Extract a bundle from the upstream release assets into `${APP_DATA_DIR}/data/plugins/<plugin-id>/` so that it holds `plugin.json` and `plugin.wasm`, then restart the app and enable it under Settings, Plugins.
+- **Routing and geocoding** — auto-routing, elevation, (reverse) geocoding and map POIs are served by the public OpenStreetMap endpoints by default. Point `VALHALLA_URL`, `NOMINATIM_URL` and `OVERPASS_API_URL` at your own instances through a user-config override if you would rather not send those lookups out.
+
+## Data layout
+
+- `${APP_DATA_DIR}/data/pb_data` — the PocketBase database: trails, lists, users and their photos. **This is the one folder to back up.**
+- `${APP_DATA_DIR}/data/uploads` — the bulk-upload drop folder, one subfolder per API token.
+- `${APP_DATA_DIR}/data/plugins` — installed provider plugin bundles.
+- `${APP_DATA_DIR}/data/data.ms-v1.36` — the Meilisearch index. Derived data, rebuilt from PocketBase whenever it is missing or empty, so it needs no backup.
+
+> ℹ️ Meilisearch moved from v1.11.3 to v1.36.0 in the v0.21.2 update. Meilisearch cannot open a database written by anything older than v1.12, so the index starts fresh in the folder above and wanderer rebuilds it from PocketBase on the first start, which takes a while on a large catalogue. Once search is working again, the old `${APP_DATA_DIR}/data/data.ms` folder is dead weight and can be deleted.
+
 ## Support wanderer
 
 If you like wanderer and would like to give something back you can donate over [here](https://www.buymeacoffee.com/wanderertrails). If you prefer to support the development with a regular contribution you can donate via [Liberapay](https://liberapay.com/wanderer/).

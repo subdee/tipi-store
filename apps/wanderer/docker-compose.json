@@ -39,12 +39,16 @@
           "value": "/app/uploads"
         },
         {
-          "key": "PUBLIC_VALHALLA_URL",
+          "key": "VALHALLA_URL",
           "value": "https://valhalla1.openstreetmap.de"
         },
         {
-          "key": "PUBLIC_NOMINATIM_URL",
+          "key": "NOMINATIM_URL",
           "value": "https://nominatim.openstreetmap.org"
+        },
+        {
+          "key": "OVERPASS_API_URL",
+          "value": "https://overpass-api.de"
         }
       ],
       "internalPort": 3000,
@@ -68,7 +72,7 @@
     },
     {
       "name": "search",
-      "image": "getmeili/meilisearch:v1.11.3",
+      "image": "getmeili/meilisearch:v1.36.0",
       "environment": [
         {
           "key": "MEILI_URL",
@@ -86,7 +90,7 @@
       "internalPort": 7700,
       "volumes": [
         {
-          "hostPath": "${APP_DATA_DIR}/data/data.ms",
+          "hostPath": "${APP_DATA_DIR}/data/data.ms-v1.36",
           "containerPath": "/meili_data/data.ms",
           "readOnly": false,
           "shared": false,
@@ -131,6 +135,13 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/pb_data",
           "containerPath": "/pb_data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/plugins",
+          "containerPath": "/data/plugins",
           "readOnly": false,
           "shared": false,
           "private": false
