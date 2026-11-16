@@ -1,0 +1,207 @@
+{
+  "schemaVersion": 2,
+  "services": [
+    {
+      "name": "dawarich",
+      "image": "freikin/dawarich:1.23.0",
+      "isMain": true,
+      "internalPort": 3000,
+      "entrypoint": [
+        "web-entrypoint.sh"
+      ],
+      "command": [
+        "bin/rails",
+        "server",
+        "-p",
+        "3000",
+        "-b",
+        "::"
+      ],
+      "environment": [
+        {
+          "key": "RAILS_ENV",
+          "value": "production"
+        },
+        {
+          "key": "SELF_HOSTED",
+          "value": "true"
+        },
+        {
+          "key": "SECRET_KEY_BASE",
+          "value": "${SECRET_KEY_BASE}"
+        },
+        {
+          "key": "DATABASE_HOST",
+          "value": "dawarich-db"
+        },
+        {
+          "key": "DATABASE_PORT",
+          "value": "5432"
+        },
+        {
+          "key": "DATABASE_USERNAME",
+          "value": "dawarich"
+        },
+        {
+          "key": "DATABASE_PASSWORD",
+          "value": "${DB_PASSWORD}"
+        },
+        {
+          "key": "DATABASE_NAME",
+          "value": "dawarich"
+        },
+        {
+          "key": "REDIS_URL",
+          "value": "redis://dawarich-redis:6379"
+        },
+        {
+          "key": "APPLICATION_HOSTS",
+          "value": "${APP_DOMAIN:-localhost},localhost,127.0.0.1,::1"
+        },
+        {
+          "key": "APPLICATION_PROTOCOL",
+          "value": "https"
+        },
+        {
+          "key": "TIME_ZONE",
+          "value": "${TZ}"
+        },
+        {
+          "key": "SIDEKIQ_EMBEDDED",
+          "value": "true"
+        },
+        {
+          "key": "WEB_CONCURRENCY",
+          "value": "0"
+        },
+        {
+          "key": "BACKGROUND_PROCESSING_CONCURRENCY",
+          "value": "2"
+        },
+        {
+          "key": "STORE_GEODATA",
+          "value": "true"
+        },
+        {
+          "key": "PROMETHEUS_EXPORTER_ENABLED",
+          "value": "false"
+        },
+        {
+          "key": "RAILS_LOG_TO_STDOUT",
+          "value": "true"
+        }
+      ],
+      "stdinOpen": true,
+      "tty": true,
+      "stopGracePeriod": "60s",
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/public",
+          "containerPath": "/var/app/public",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/storage",
+          "containerPath": "/var/app/storage",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/watched",
+          "containerPath": "/var/app/tmp/imports/watched",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "dependsOn": {
+        "dawarich-db": {
+          "condition": "service_healthy"
+        },
+        "dawarich-redis": {
+          "condition": "service_healthy"
+        }
+      },
+      "healthCheck": {
+        "test": "wget -qO - http://127.0.0.1:3000/api/v1/health | grep -qE '\"status\" *: *\"ok\"' || exit 1",
+        "interval": "10s",
+        "timeout": "10s",
+        "retries": 30,
+        "startPeriod": "30s"
+      }
+    },
+    {
+      "name": "dawarich-db",
+      "image": "imresamu/postgis:17-3.5-alpine",
+      "shmSize": "1gb",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "dawarich"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "dawarich"
+        },
+        {
+          "key": "PGDATA",
+          "value": "/var/lib/postgresql/data/pgdata"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U dawarich -d dawarich || exit 1",
+        "interval": "10s",
+        "timeout": "10s",
+        "retries": 5,
+        "startPeriod": "30s"
+      }
+    },
+    {
+      "name": "dawarich-redis",
+      "image": "redis:8-alpine",
+      "command": [
+        "redis-server",
+        "--save",
+        "900",
+        "1",
+        "--save",
+        "300",
+        "10",
+        "--appendonly",
+        "no"
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/redis",
+          "containerPath": "/data",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        }
+      ],
+      "healthCheck": {
+        "test": "redis-cli ping || exit 1",
+        "interval": "10s",
+        "timeout": "10s",
+        "retries": 5,
+        "startPeriod": "10s"
+      }
+    }
+  ]
+}

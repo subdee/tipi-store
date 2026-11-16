@@ -1,0 +1,40 @@
+{
+  "name": "Dawarich",
+  "id": "dawarich",
+  "available": true,
+  "short_desc": "Self-hosted location history tracker, an alternative to Google Timeline",
+  "author": "Freika",
+  "port": 8089,
+  "categories": [
+    "data",
+    "utilities"
+  ],
+  "description": "Dawarich is a self-hosted web app for storing and visualising your own location history. Import your Google Maps Timeline, Owntracks, Immich, Photoprism or GPX history, or have a phone app post points to it continuously, then browse the result on a map with heatmaps, routes and fog-of-war coverage. It works out the cities and countries you have visited, counts your points and distance per month and year, keeps a list of trips, and can suggest visits from clusters of points so you can confirm or rename them. Reverse geocoding can run against a geocoder you host yourself, so no part of your location history has to leave your server.",
+  "tipi_version": 1,
+  "version": "1.23.0",
+  "source": "https://github.com/Freika/dawarich",
+  "website": "https://dawarich.app",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1794841828986,
+  "updated_at": 1794841828986,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Secret key base",
+      "hint": "Rails signs sessions and cookies with this. Required in production; changing it signs everyone out. Equivalent to `openssl rand -hex 64`.",
+      "env_variable": "SECRET_KEY_BASE",
+      "min": 128,
+      "encoding": "hex"
+    },
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "DB_PASSWORD"
+    }
+  ]
+}
