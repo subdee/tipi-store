@@ -44,6 +44,62 @@ flexibility and ease of customization.
 
 For more information please see the Endurain's [documentation](https://docs.endurain.com).
 
+## Configuration notes
+
+### Postgres 18: one-time manual migration required
+
+This app moved from `postgres:17.5` to `postgres:18` to match what Endurain
+ships upstream. **Postgres cannot read a data directory written by an older
+major version**, so updating this app will leave the database container
+failing to start until you migrate the data once, by hand. Nothing is
+migrated for you, and there is no automatic path.
+
+Do this *before* taking the app update, while 17.5 is still running. Replace
+`<APP_DATA_DIR>` with your app's data directory and `<PROJECT>` with the
+compose project name (`docker ps` will show both).
+
+```sh
+# 1. Stop only the app, leaving Postgres up so nothing writes during the dump
+docker stop <PROJECT>-app-1
+
+# 2. Dump with 18's pg_dump against the running 17 server
+mkdir -p /root/endurain-pg18 && chmod 700 /root/endurain-pg18
+docker run --rm --network <PROJECT>_<PROJECT>_network \
+  -v <APP_DATA_DIR>:/cfg:ro -v /root/endurain-pg18:/dump postgres:18 \
+  sh -c 'export PGPASSWORD=$(grep -m1 "^DB_PASSWORD=" /cfg/app.env | cut -d= -f2-); \
+         pg_dump -h <PROJECT>-postgres-1 -U endurain -d endurain -Fc -f /dump/endurain.dump'
+
+# 3. Check the dump before destroying anything: expect ~45 tables
+docker run --rm -v /root/endurain-pg18:/dump postgres:18 \
+  pg_restore -l /dump/endurain.dump | grep -c "TABLE DATA"
+
+# 4. Stop Postgres and MOVE the old cluster aside - do not delete it.
+#    Keep it outside the app data directory so it stays out of Runtipi backups.
+docker stop <PROJECT>-postgres-1
+mv <APP_DATA_DIR>/data/postgres /root/endurain-pg18/postgres-pg17
+
+# 5. Take the app update in Runtipi. Postgres 18 initialises an empty cluster
+#    and Endurain builds its own schema on first start.
+
+# 6. Stop the app again, then replace that schema with the dump
+docker stop <PROJECT>-app-1
+docker run --rm --network <PROJECT>_<PROJECT>_network \
+  -v <APP_DATA_DIR>:/cfg:ro -v /root/endurain-pg18:/dump postgres:18 \
+  sh -c 'export PGPASSWORD=$(grep -m1 "^DB_PASSWORD=" /cfg/app.env | cut -d= -f2-); \
+         pg_restore -h <PROJECT>-postgres-1 -U endurain -d postgres \
+                    --clean --create --no-owner /dump/endurain.dump'
+docker start <PROJECT>-app-1
+```
+
+To roll back at any point, set the image back to `docker.io/postgres:17.5`
+through a user-config override, move `postgres-pg17` back to
+`<APP_DATA_DIR>/data/postgres`, and restart the app. Keep that directory until
+you are satisfied the upgrade took.
+
+Staying on 17.5 is also a valid choice: Postgres 17 is supported until
+November 2029 and Endurain does not require 18. Pin it with a user-config
+override if you would rather not migrate.
+
 ## Sponsors
 
 A huge thank you to the project sponsors! Your support helps keep this project going.

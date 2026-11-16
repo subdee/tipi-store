@@ -77,7 +77,7 @@
     },
     {
       "name": "postgres",
-      "image": "docker.io/postgres:17.5",
+      "image": "docker.io/postgres:18",
       "environment": [
         {
           "key": "DB_PASSWORD",
