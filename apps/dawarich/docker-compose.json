@@ -126,7 +126,7 @@
         }
       },
       "healthCheck": {
-        "test": "wget -qO - http://127.0.0.1:3000/api/v1/health | grep -qE '\"status\" *: *\"ok\"' || exit 1",
+        "test": "wget -qO - --header=\"X-Forwarded-Proto: https\" http://127.0.0.1:3000/api/v1/health | grep -qE '\"status\" *: *\"ok\"' || exit 1",
         "interval": "10s",
         "timeout": "10s",
         "retries": 30,

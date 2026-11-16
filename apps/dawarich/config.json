@@ -10,7 +10,7 @@
     "utilities"
   ],
   "description": "Dawarich is a self-hosted web app for storing and visualising your own location history. Import your Google Maps Timeline, Owntracks, Immich, Photoprism or GPX history, or have a phone app post points to it continuously, then browse the result on a map with heatmaps, routes and fog-of-war coverage. It works out the cities and countries you have visited, counts your points and distance per month and year, keeps a list of trips, and can suggest visits from clusters of points so you can confirm or rename them. Reverse geocoding can run against a geocoder you host yourself, so no part of your location history has to leave your server.",
-  "tipi_version": 1,
+  "tipi_version": 2,
   "version": "1.23.0",
   "source": "https://github.com/Freika/dawarich",
   "website": "https://dawarich.app",
@@ -20,7 +20,7 @@
     "amd64"
   ],
   "created_at": 1794841828986,
-  "updated_at": 1794841828986,
+  "updated_at": 1794842698655,
   "dynamic_config": true,
   "form_fields": [
     {
