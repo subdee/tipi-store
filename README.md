@@ -12,6 +12,7 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 - [Dawarich](https://github.com/Freika/dawarich) - Self-hosted location history tracker, an alternative to Google Timeline
 - [Donetick](https://github.com/donetick/donetick) - Task and chore manager for you and your household
 - [Endurain](https://docs.endurain.com/) - Self-hosted fitness tracking service
+- [Forgejo](https://forgejo.org) - Lightweight self-hosted software forge: Git hosting, code review, issues and CI
 - [openGym](https://gitlab.com/DuarteSantos8/opengym) - Self-hosted gym and body-weight tracker
 - [Papra](https://github.com/papra-hq/papra) - Minimalistic document archiving platform
 - [Securo](https://github.com/securo-finance/securo) - Open-source personal finance manager, self-hosted and privacy-first

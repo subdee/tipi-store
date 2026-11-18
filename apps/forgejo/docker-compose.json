@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 2,
+  "$schema": "https://schemas.runtipi.io/v2/dynamic-compose.json",
+  "services": [
+    {
+      "name": "forgejo",
+      "image": "data.forgejo.org/forgejo/forgejo:17.0.1",
+      "isMain": true,
+      "internalPort": 3000,
+      "addPorts": [
+        {
+          "hostPort": "${FORGEJO_SSH_PORT}",
+          "containerPort": 22
+        }
+      ],
+      "environment": [
+        {
+          "key": "USER_UID",
+          "value": "1000"
+        },
+        {
+          "key": "USER_GID",
+          "value": "1000"
+        },
+        {
+          "key": "FORGEJO__database__DB_TYPE",
+          "value": "postgres"
+        },
+        {
+          "key": "FORGEJO__database__HOST",
+          "value": "forgejo-db:5432"
+        },
+        {
+          "key": "FORGEJO__database__NAME",
+          "value": "forgejo"
+        },
+        {
+          "key": "FORGEJO__database__USER",
+          "value": "forgejo"
+        },
+        {
+          "key": "FORGEJO__database__PASSWD",
+          "value": "${FORGEJO_DB_PASSWORD}"
+        },
+        {
+          "key": "FORGEJO__server__DOMAIN",
+          "value": "${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "FORGEJO__server__ROOT_URL",
+          "value": "https://${APP_DOMAIN:-localhost}/"
+        },
+        {
+          "key": "FORGEJO__server__SSH_DOMAIN",
+          "value": "${APP_DOMAIN:-localhost}"
+        },
+        {
+          "key": "FORGEJO__server__SSH_PORT",
+          "value": "${FORGEJO_SSH_PORT}"
+        },
+        {
+          "key": "FORGEJO__service__DISABLE_REGISTRATION",
+          "value": "true"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/forgejo",
+          "containerPath": "/data"
+        }
+      ],
+      "dependsOn": {
+        "forgejo-db": {
+          "condition": "service_healthy"
+        }
+      },
+      "healthCheck": {
+        "test": "curl -fsS http://localhost:3000/api/healthz || exit 1",
+        "interval": "30s",
+        "timeout": "5s",
+        "retries": 3,
+        "startPeriod": "30s"
+      }
+    },
+    {
+      "name": "forgejo-db",
+      "image": "docker.io/postgres:18",
+      "environment": [
+        {
+          "key": "POSTGRES_USER",
+          "value": "forgejo"
+        },
+        {
+          "key": "POSTGRES_PASSWORD",
+          "value": "${FORGEJO_DB_PASSWORD}"
+        },
+        {
+          "key": "POSTGRES_DB",
+          "value": "forgejo"
+        },
+        {
+          "key": "PGDATA",
+          "value": "/var/lib/postgresql/data/pgdata"
+        }
+      ],
+      "volumes": [
+        {
+          "hostPath": "${APP_DATA_DIR}/data/postgres",
+          "containerPath": "/var/lib/postgresql/data"
+        }
+      ],
+      "healthCheck": {
+        "test": "pg_isready -U forgejo -d forgejo",
+        "interval": "5s",
+        "timeout": "5s",
+        "retries": 10
+      }
+    }
+  ]
+}

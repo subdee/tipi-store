@@ -1,0 +1,40 @@
+{
+  "name": "Forgejo",
+  "id": "forgejo",
+  "available": true,
+  "short_desc": "Lightweight self-hosted software forge: Git hosting, code review, issues and CI",
+  "author": "forgejo",
+  "port": 8195,
+  "categories": [
+    "development"
+  ],
+  "description": "Forgejo is a self-hosted lightweight software forge. It hosts Git repositories over HTTPS and SSH, with pull requests and code review, issues and project boards, a wiki, releases, a package registry, and Forgejo Actions for CI. It is a community-run, 100% free software fork of Gitea.",
+  "tipi_version": 1,
+  "version": "17.0.1",
+  "source": "https://codeberg.org/forgejo/forgejo",
+  "website": "https://forgejo.org",
+  "exposable": true,
+  "supported_architectures": [
+    "arm64",
+    "amd64"
+  ],
+  "created_at": 1794996264000,
+  "updated_at": 1794996264000,
+  "dynamic_config": true,
+  "form_fields": [
+    {
+      "type": "random",
+      "label": "Database password",
+      "env_variable": "FORGEJO_DB_PASSWORD",
+      "min": 32
+    },
+    {
+      "type": "number",
+      "label": "SSH port",
+      "hint": "Host port Git-over-SSH is published on, and the port Forgejo shows in SSH clone URLs. Must be free on the host.",
+      "env_variable": "FORGEJO_SSH_PORT",
+      "default": 2222,
+      "required": true
+    }
+  ]
+}
