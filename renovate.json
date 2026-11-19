@@ -7,6 +7,7 @@
     "renovate"
   ],
   "automergeStrategy": "rebase",
+  "platformAutomerge": false,
   "customManagers": [
     {
       "customType": "regex",
@@ -21,19 +22,14 @@
   ],
   "packageRules": [
     {
+      "description": "Automerge non-major updates once the Test workflow passes. Majors stay manual: they are where app images change config, env vars or backing-service requirements.",
       "matchUpdateTypes": [
         "minor",
         "patch",
         "pin",
         "digest"
       ],
-      "automerge": false
-    },
-    {
-      "matchDepTypes": [
-        "devDependencies"
-      ],
-      "automerge": false
+      "automerge": true
     },
     {
       "description": "Backing services are pinned to the version each upstream app expects; do not auto-update them. Docker datasource reports names with a registry/namespace prefix (e.g. docker.io/postgres, postgis/postgis, getmeili/meilisearch), so match on a trailing path segment.",
