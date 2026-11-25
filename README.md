@@ -4,7 +4,6 @@ This repository is my personal custom app store for [Runtipi](https://runtipi.io
 
 ## Apps available
 
-- [AdventureLog](https://github.com/seanmorley15/AdventureLog) - The ultimate travel companion
 - [Aeterna](https://github.com/alpyxn/aeterna) - Lightweight self-hosted dead man's switch
 - [BentoPDF](https://github.com/alam00000/bentopdf) - Privacy-first PDF toolkit that runs entirely in your browser
 - [Calibre-Web Automated](https://github.com/crocodilestick/Calibre-Web-Automated) - All-in-one self-hosted digital library

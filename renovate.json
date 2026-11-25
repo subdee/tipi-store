@@ -58,15 +58,6 @@
         "docker"
       ],
       "matchPackageNames": [
-        "/(^|/)adventurelog-(frontend|backend)$/"
-      ],
-      "groupName": "AdventureLog"
-    },
-    {
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
         "/(^|/)aeterna-(frontend|backend)$/"
       ],
       "groupName": "Aeterna"
