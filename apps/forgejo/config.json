@@ -9,8 +9,8 @@
     "development"
   ],
   "description": "Forgejo is a self-hosted lightweight software forge. It hosts Git repositories over HTTPS and SSH, with pull requests and code review, issues and project boards, a wiki, releases, a package registry, and Forgejo Actions for CI. It is a community-run, 100% free software fork of Gitea.",
-  "tipi_version": 1,
-  "version": "17.0.1",
+  "tipi_version": 2,
+  "version": "17.0.2",
   "source": "https://codeberg.org/forgejo/forgejo",
   "website": "https://forgejo.org",
   "exposable": true,
@@ -19,7 +19,7 @@
     "amd64"
   ],
   "created_at": 1794996264000,
-  "updated_at": 1794996264000,
+  "updated_at": 1795611619288,
   "dynamic_config": true,
   "form_fields": [
     {
