@@ -93,7 +93,8 @@
   "postUpgradeTasks": {
     "commands": [
       "bun ./scripts/update-config.ts {{packageFile}} {{newVersion}}",
-      "bun install && bun run test"
+      "bun install --frozen-lockfile",
+      "bun run test"
     ],
     "fileFilters": [
       "**/*"
