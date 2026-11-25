@@ -24,10 +24,6 @@
           "value": "${FERNET_KEY}"
         },
         {
-          "key": "GEOCODES_MAPS_API",
-          "value": "${GEOCODES_API}"
-        },
-        {
           "key": "TZ",
           "value": "${TZ}"
         },
@@ -98,10 +94,6 @@
         {
           "key": "FERNET_KEY",
           "value": "${FERNET_KEY}"
-        },
-        {
-          "key": "GEOCODES_MAPS_API",
-          "value": "${GEOCODES_API}"
         },
         {
           "key": "TZ",

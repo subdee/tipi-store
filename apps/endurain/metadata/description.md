@@ -55,11 +55,26 @@ stored files and import folders to the new UUIDs.
 
 Before taking the update:
 
+> [!WARNING]
+> **Check for a gap in the migration ids, not just for unfinished rows.** The
+> first revision requires ids `1,2,3,4,5,6,8,9,10` to be present *and*
+> `executed` (7 is excluded; it is registered on every install). Row 4 is
+> seeded only by the v0.13.0-**RC2** alembic revision, so an install that never
+> ran that revision has no row 4 at all — and the upgrade then refuses with
+> `Data migrations 4 have not finished`. Waiting on v0.20.x cannot fix that:
+> the runner only iterates rows that already exist, so a missing row is never
+> scheduled. Check with
+> `select id, name, executed from migrations order by id;`. If 4 is absent, and
+> `users.photo_path` is already a bare filename with no `/` in it (migration 10
+> converted it to a storage key), migration 4's work is obsolete — running it
+> would re-add a `data/` prefix and break the photo. Register it as done
+> instead:
+> `INSERT INTO migrations (id, name, description, executed) VALUES (4, 'v0.13.0', 'Fix users photo path', true);`
+
 ```bash
-# 1. Confirm v0.20.x finished its data migrations. v0.21.0 only upgrades from
-#    v0.20.x with none pending, and the first revision refuses anything else
-#    and says why. If any are still running, leave the app on v0.20.x until
-#    they finish.
+# 1. Confirm v0.20.x finished its data migrations, and that no id is missing
+#    from the table (see the warning above - a gap is the failure mode that
+#    waiting cannot fix).
 
 # 2. Stop the app, leaving Postgres up, then dump the database and the data dir
 docker stop endurain_<store>-app-1
@@ -104,13 +119,13 @@ Environment variables this app handles for you:
   yours, replacing it is safe here — this upgrade signs everyone out anyway.
 - **`FERNET_KEY` must not be the example value** published in Endurain's `.env.example`
   or docs, or the container refuses to start. A key from fernetkeygen.com is fine.
-- **The Geocodes Maps API key is deprecated.** v0.21.0 imports it into
-  *Settings > Server > Reverse geocoding* on the first start, shows it read-only
-  while the variable is set, and logs one warning per start. Leave the field as
-  it is for this release so the import happens — **v0.22.0 refuses to start
-  while it is set**, so it will be removed from this app at that point, along
-  with reverse geocoding, email and session settings generally moving into the
-  admin UI.
+- **Reverse geocoding is configured in the app, not here.** It lives under
+  *Settings > Server > Reverse geocoding*, alongside email, sessions and data
+  retention. This app no longer passes `GEOCODES_MAPS_API`: while that variable
+  is set it overwrites the stored value on every start, and **v0.22.0 refuses to
+  start while it is set**. If you are upgrading from an install that had the key,
+  v0.21.0 already copied it into the database on its first start, so removing the
+  variable loses nothing — the setting simply becomes editable in the UI.
 
 ### Postgres 18: one-time manual migration required
 

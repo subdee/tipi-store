@@ -10,7 +10,7 @@
     "data"
   ],
   "description": "Endurain is a self-hosted fitness tracking service designed to give users full control over their data and hosting environment.",
-  "tipi_version": 17,
+  "tipi_version": 18,
   "version": "v0.21.0",
   "source": "https://github.com/endurain-project/endurain",
   "exposable": true,
@@ -19,7 +19,7 @@
     "amd64"
   ],
   "created_at": 1753187483000,
-  "updated_at": 1795610559681,
+  "updated_at": 1795613056420,
   "dynamic_config": true,
   "form_fields": [
     {
@@ -46,11 +46,6 @@
       "env_variable": "TRUSTED_PROXIES",
       "default": "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16",
       "hint": "Required from v0.21.0 because this app runs Endurain behind a proxy: IPs, CIDR ranges or hostnames of your reverse proxy, comma separated, never *. The default trusts the private ranges Docker and Runtipi's proxy use; narrow it to runtipi-reverse-proxy if you want it tighter."
-    },
-    {
-      "type": "text",
-      "label": "Geocodes Maps API key",
-      "env_variable": "GEOCODES_API"
     },
     {
       "type": "text",
