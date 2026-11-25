@@ -31,6 +31,13 @@ permissions:
   # Renovate maintains its Dependency Dashboard as an issue; without this it
   # fails ensureIssue() with "integration-unauthorized".
   issues: write
+  # Renovate posts commit statuses on the branches it pushes (its own
+  # renovate/* internal checks). setBranchStatus() turns ANY failure of that
+  # POST into REPOSITORY_CHANGED, which aborts the whole run before it opens
+  # the PR, prunes stale branches or refreshes the dashboard -- and logs the
+  # reason at debug only. An explicit permissions block sets every scope it
+  # does not name to none, so this has to be listed.
+  statuses: write
 
 jobs:
   renovate:
