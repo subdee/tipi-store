@@ -32,6 +32,17 @@
       "automerge": true
     },
     {
+      "description": "Pre-1.0 images ship breaking changes in minor releases, and the test suite only validates the schema, not that an app still starts. Keep 0.x minors manual; their patches still automerge.",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchCurrentVersion": "/^v?0\\./",
+      "matchUpdateTypes": [
+        "minor"
+      ],
+      "automerge": false
+    },
+    {
       "description": "Backing services are pinned to the version each upstream app expects; do not auto-update them. Docker datasource reports names with a registry/namespace prefix (e.g. docker.io/postgres, postgis/postgis, getmeili/meilisearch), so match on a trailing path segment.",
       "matchDatasources": [
         "docker"
