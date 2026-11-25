@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.13.1",
+      "image": "ghcr.io/seanmorley15/adventurelog-frontend:v0.14.0",
       "isMain": true,
       "internalPort": 3000,
       "environment": [
@@ -13,7 +13,11 @@
         },
         {
           "key": "BODY_SIZE_LIMIT",
-          "value": "100000"
+          "value": "Infinity"
+        },
+        {
+          "key": "SITE_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
         }
       ],
       "dependsOn": [
@@ -22,7 +26,7 @@
     },
     {
       "name": "db",
-      "image": "postgis/postgis:16-3.5",
+      "image": "imresamu/postgis:16-3.5",
       "environment": [
         {
           "key": "PGHOST",
@@ -53,7 +57,7 @@
     },
     {
       "name": "backend",
-      "image": "ghcr.io/seanmorley15/adventurelog-backend:v0.13.1",
+      "image": "ghcr.io/seanmorley15/adventurelog-backend:v0.14.0",
       "internalPort": 80,
       "environment": [
         {
@@ -107,6 +111,10 @@
         {
           "key": "POSTGRES_PASSWORD",
           "value": "${DB_PASSWORD:-adventure123}"
+        },
+        {
+          "key": "SITE_URL",
+          "value": "https://${APP_DOMAIN:-localhost}"
         }
       ],
       "volumes": [
