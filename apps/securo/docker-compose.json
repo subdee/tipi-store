@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "frontend",
-      "image": "ghcr.io/securo-finance/securo-frontend:0.18.0",
+      "image": "ghcr.io/securo-finance/securo-frontend:0.22.0",
       "isMain": true,
       "internalPort": 8080,
       "environment": [
@@ -20,7 +20,7 @@
     },
     {
       "name": "backend",
-      "image": "ghcr.io/securo-finance/securo-backend:0.18.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.22.0",
       "command": "sh -c \"alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000\"",
       "environment": [
         {
@@ -110,6 +110,10 @@
         {
           "key": "AGENTS_EMBEDDING_PROVIDER",
           "value": "native"
+        },
+        {
+          "key": "PLUGINS_ENABLED",
+          "value": "${PLUGINS_ENABLED:-false}"
         }
       ],
       "volumes": [
@@ -130,6 +134,13 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/embedding_models",
           "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/backups",
+          "containerPath": "/app/data/backups",
           "readOnly": false,
           "shared": false,
           "private": false
@@ -164,7 +175,7 @@
     },
     {
       "name": "celery-worker",
-      "image": "ghcr.io/securo-finance/securo-backend:0.18.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.22.0",
       "command": "celery -A app.worker worker --loglevel=info --concurrency=2",
       "environment": [
         {
@@ -254,6 +265,10 @@
         {
           "key": "AGENTS_EMBEDDING_PROVIDER",
           "value": "native"
+        },
+        {
+          "key": "PLUGINS_ENABLED",
+          "value": "${PLUGINS_ENABLED:-false}"
         }
       ],
       "volumes": [
@@ -274,6 +289,13 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/embedding_models",
           "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/backups",
+          "containerPath": "/app/data/backups",
           "readOnly": false,
           "shared": false,
           "private": false
@@ -303,7 +325,7 @@
     },
     {
       "name": "celery-beat",
-      "image": "ghcr.io/securo-finance/securo-backend:0.18.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.22.0",
       "command": "celery -A app.worker beat --loglevel=info",
       "environment": [
         {
@@ -393,6 +415,10 @@
         {
           "key": "AGENTS_EMBEDDING_PROVIDER",
           "value": "native"
+        },
+        {
+          "key": "PLUGINS_ENABLED",
+          "value": "${PLUGINS_ENABLED:-false}"
         }
       ],
       "volumes": [
@@ -413,6 +439,13 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/embedding_models",
           "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/backups",
+          "containerPath": "/app/data/backups",
           "readOnly": false,
           "shared": false,
           "private": false
@@ -442,7 +475,7 @@
     },
     {
       "name": "mcp-server",
-      "image": "ghcr.io/securo-finance/securo-backend:0.18.0",
+      "image": "ghcr.io/securo-finance/securo-backend:0.22.0",
       "command": "uvicorn mcp_server.main:app --host 0.0.0.0 --port 8765",
       "environment": [
         {
@@ -532,6 +565,10 @@
         {
           "key": "AGENTS_EMBEDDING_PROVIDER",
           "value": "native"
+        },
+        {
+          "key": "PLUGINS_ENABLED",
+          "value": "${PLUGINS_ENABLED:-false}"
         }
       ],
       "volumes": [
@@ -552,6 +589,13 @@
         {
           "hostPath": "${APP_DATA_DIR}/data/embedding_models",
           "containerPath": "/app/data/embedding_models",
+          "readOnly": false,
+          "shared": false,
+          "private": false
+        },
+        {
+          "hostPath": "${APP_DATA_DIR}/data/backups",
+          "containerPath": "/app/data/backups",
           "readOnly": false,
           "shared": false,
           "private": false

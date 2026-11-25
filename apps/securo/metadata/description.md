@@ -17,12 +17,28 @@ An open-source personal finance manager that runs on your own machine. Accounts,
 ## Configuration notes
 
 - **Public registration is off.** The first account is created through the setup screen the first time you open the app, which works regardless of this setting. Open the app and finish setup straight away — until a first user exists, whoever reaches the instance can claim the admin account. To let other people sign up afterwards, turn registration on under **Admin → Settings**.
-- **Secrets are generated for you.** The app secret, the database password and the agents MCP secret are all random per install. Upstream ships placeholder defaults for these; changing the app secret later makes stored provider credentials unreadable, so leave it alone once you are running.
+- **Secrets are generated for you.** The app secret, the database password and the agents MCP secret are all random per install. Upstream ships placeholder defaults for these; changing the app secret later makes stored provider
+  credentials unreadable, so leave it alone once you are running. Since 0.20 Securo generates its own key
+  and keeps it in the database when an install has none — that path never applies here, because this app
+  always passes one in, so an update does not sign everyone out.
 - **Expose it with a domain if you want passkeys.** WebAuthn refuses plain HTTP and refuses IP addresses, both by standard rather than by choice of this app. On `http://<host-ip>:8088` passwords and TOTP work but passkeys do not.
 - **Trusted proxy hops** — leave at 1 when you reach Securo on the host IP and port. Set it to 2 when you expose it through Runtipi with a domain, so login rate limiting keys on the real client IP instead of lumping every visitor into one bucket.
 - **Bank sync is opt-in and provider-based.** SimpleFIN (US and international) needs only the toggle — each connection carries its own setup token from the SimpleFIN Bridge. Enable Banking (~2500 European PSD2 banks) needs an application ID plus its PEM key at `<app data>/secrets/enable_banking_private.pem`. Pluggy (Brazilian banks) is supported upstream but not wired up here.
+- **Managed backups (0.21 and newer)** — Securo can create, schedule and restore its own backups from a
+  dedicated page, with retention controls. They are written to `${APP_DATA_DIR}/data/backups`, which is
+  separate from Runtipi's own app backup, so keep an eye on the size if you set a long retention.
+- **Plugins are off by default.** With the toggle on, you can install plugins that add categories, rules,
+  themes and reports; the catalog index is fetched from `plugins.usesecuro.com`. Plugins that ship *code* —
+  including the bank-provider plugins upstream now builds new bank integrations as — need a separate runner
+  container and an egress proxy that this app does not include, so they cannot be installed here.
+- **Reading statements and receipts with an LLM (0.22 and newer)** reuses one of the LLM connections you
+  already configured; there is no extra setting or container. It needs a model that can read images for
+  scanned documents, and Securo checks and warns before sending anything.
 - **Exchange rates** — a free Open Exchange Rates app ID enables real FX conversion. Without one, cross-currency amounts fall back to 1:1 with a visible warning.
 - **AI agents** — off by default. Turning the toggle on activates the feature; the MCP container that gives the agents access to your data runs either way. Add a provider connection under **Settings → AI Agents**: a model server on the Runtipi host is reachable as `http://host.docker.internal:<port>`.
+- **Bank and exchange-rate providers can also be set in the app** since 0.19, under **Admin**. The form
+  fields here still work; where both are set, treat the form fields as the source of truth so an app update
+  does not overwrite what you changed in the UI.
 - **Tesouro Direto is disabled** here. It is a Brazilian Treasury bond lookup that polls a Brazilian government CSV endpoint; upstream defaults it on.
 
 ## What talks to the internet
@@ -33,12 +49,15 @@ The app is private by default in the sense that your financial data stays in you
 - **Google's favicon service** — bank and asset logos are `https://www.google.com/s2/favicons?domain=…` URLs your browser fetches. For SimpleFIN-linked banks and for market-tracked assets, that tells Google which institutions and companies appear in your portfolio. Nothing else about the holding is sent, and the feature degrades to a generic icon if the request is blocked.
 - **Update check** — the browser asks `api.github.com` for the latest Securo release every six hours. Turn it off in the UI if you would rather it did not.
 - **Yahoo Finance** — the backend looks up quotes for tickers you add as assets, which discloses those symbols. Only runs if you track market-priced assets.
+- **The plugin catalog** — only with plugins enabled, the backend fetches an index from
+  `plugins.usesecuro.com` and plugin icons are served through your own Securo.
 - **Your bank-sync provider** — whichever of SimpleFIN or Enable Banking you configure, and only then.
 
 ## Data layout
 
 - `${APP_DATA_DIR}/data/postgres` — the database, and the thing to back up
 - `${APP_DATA_DIR}/data/attachments` — receipts and invoice documents
+- `${APP_DATA_DIR}/data/backups` — backups Securo makes itself, from the backups page
 - `${APP_DATA_DIR}/data/agent_knowledge` and `data/embedding_models` — agents knowledge base and its local embedding model
 - `${APP_DATA_DIR}/secrets` — put the Enable Banking PEM key here; mounted read-only
 

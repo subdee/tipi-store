@@ -10,8 +10,8 @@
     "data"
   ],
   "description": "Securo is a self-hosted personal finance manager. Track accounts with running balances, import transactions from OFX, QIF, CAMT and CSV files, auto-categorise them with a rules engine, and follow budgets, recurring transactions, goals and assets over time. Net worth and income-versus-expenses reports come built in, with multi-currency support and automatic FX conversion. Bank sync is optional and provider-based: Enable Banking for roughly 2500 European PSD2 banks, SimpleFIN for US and international banks, Pluggy for Brazilian banks. Multi-user with an admin panel, TOTP two-factor, passkeys and OIDC login, plus an optional self-hosted AI agents feature that can chat over your own data.",
-  "tipi_version": 28,
-  "version": "0.18.0",
+  "tipi_version": 29,
+  "version": "0.22.0",
   "source": "https://github.com/securo-finance/securo",
   "website": "https://usesecuro.com",
   "exposable": true,
@@ -20,7 +20,7 @@
     "amd64"
   ],
   "created_at": 1789483415000,
-  "updated_at": 1794839598404,
+  "updated_at": 1795610485397,
   "dynamic_config": true,
   "form_fields": [
     {
@@ -70,6 +70,12 @@
       "label": "Enable AI agents?",
       "env_variable": "AGENTS_ENABLED",
       "hint": "Self-hosted LLM chat over your finance data. Add a provider connection under Settings after enabling."
+    },
+    {
+      "type": "boolean",
+      "label": "Enable plugins?",
+      "env_variable": "PLUGINS_ENABLED",
+      "hint": "Lets you install plugins that add categories, rules, themes and reports. Browsing the catalog fetches an index from plugins.usesecuro.com. Plugins that ship code need a separate runner container, which this app does not include."
     }
   ]
 }
