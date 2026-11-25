@@ -3,7 +3,7 @@
   "services": [
     {
       "name": "app",
-      "image": "ghcr.io/endurain-project/endurain:v0.20.2",
+      "image": "ghcr.io/endurain-project/endurain:v0.21.0",
       "isMain": true,
       "user": "0:0",
       "environment": [
@@ -38,6 +38,10 @@
         {
           "key": "BEHIND_PROXY",
           "value": "true"
+        },
+        {
+          "key": "TRUSTED_PROXIES",
+          "value": "${TRUSTED_PROXIES:-172.16.0.0/12,10.0.0.0/8,192.168.0.0/16}"
         },
         {
           "key": "POSTGRES_DB",

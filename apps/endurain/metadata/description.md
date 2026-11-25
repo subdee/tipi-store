@@ -46,6 +46,72 @@ For more information please see the Endurain's [documentation](https://docs.endu
 
 ## Configuration notes
 
+### v0.21.0: back up before updating
+
+v0.21.0 rewrites the schema across 17 revisions, **converting every integer id
+to a UUID in a single transaction**. The conversion cannot be undone: restoring
+a backup is the only way back to v0.20.x. On the first start it also renames
+stored files and import folders to the new UUIDs.
+
+Before taking the update:
+
+```bash
+# 1. Confirm v0.20.x finished its data migrations. v0.21.0 only upgrades from
+#    v0.20.x with none pending, and the first revision refuses anything else
+#    and says why. If any are still running, leave the app on v0.20.x until
+#    they finish.
+
+# 2. Stop the app, leaving Postgres up, then dump the database and the data dir
+docker stop endurain_<store>-app-1
+docker exec endurain_<store>-postgres-1 \
+  pg_dump -U endurain -d endurain -Fc -f /tmp/endurain-pre-0.21.dump
+docker cp endurain_<store>-postgres-1:/tmp/endurain-pre-0.21.dump .
+tar -czf endurain-data-pre-0.21.tar.gz -C <APP_DATA_DIR>/data data
+
+# 3. Take the update. The schema upgrade runs on start, so expect downtime
+#    proportional to the size of the database.
+
+# 4. Afterwards, let the planner catch up with the rewritten tables
+docker exec endurain_<store>-postgres-1 \
+  psql -U endurain -d endurain -c 'VACUUM (ANALYZE);'
+```
+
+What changes once it is up:
+
+- **Everyone signs in again**, once. API keys keep working, and any key that had
+  no expiry now expires 365 days after the upgrade. Every browser sends one
+  "new device" notice at its first sign-in.
+- **Third-party clients break.** The API changed throughout — UUID ids, renamed
+  scopes, no CSRF token, reorganised routes. The Endurain mobile app must be at
+  least 0.11.0, and anything else that talks to the API (GadgetBridge, scripts)
+  needs to support v0.21.0 before you upgrade.
+- **Activity archives exported before v0.21.0 can no longer be imported.**
+  Export again afterwards if you keep archives.
+- **A new install no longer creates `admin`/`admin`.** The server log prints a
+  one-time setup token, valid 24 hours, and the onboarding page uses it to
+  create the first administrator:
+  `docker logs endurain_<store>-app-1 | grep -i 'setup token'`.
+
+Environment variables this app handles for you:
+
+- **`TRUSTED_PROXIES` is now required**, because this app runs Endurain behind
+  Runtipi's proxy with `BEHIND_PROXY=true`, and v0.21.0 refuses to start when
+  that is set without a usable entry. The default trusts the private ranges
+  Docker and the proxy use; narrow it with the form field if you want to.
+- **`SECRET_KEY` must be at least 32 characters with at least 10 distinct ones**,
+  and the example value from Endurain's docs is refused. New installs get a
+  64-character key. An existing 32-character key passes; if Endurain does refuse
+  yours, replacing it is safe here — this upgrade signs everyone out anyway.
+- **`FERNET_KEY` must not be the example value** published in Endurain's `.env.example`
+  or docs, or the container refuses to start. A key from fernetkeygen.com is fine.
+- **The Geocodes Maps API key is deprecated.** v0.21.0 imports it into
+  *Settings > Server > Reverse geocoding* on the first start, shows it read-only
+  while the variable is set, and logs one warning per start. Leave the field as
+  it is for this release so the import happens — **v0.22.0 refuses to start
+  while it is set**, so it will be removed from this app at that point, along
+  with reverse geocoding, email and session settings generally moving into the
+  admin UI.
+
 ### Postgres 18: one-time manual migration required
 
 This app moved from `postgres:17.5` to `postgres:18` to match what Endurain
